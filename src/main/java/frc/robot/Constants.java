@@ -28,5 +28,7 @@ public final class Constants {
     public static int LEFT_BACK_MOTOR = 1;
     public static int RIGHT_BACK_MOTOR = 3;
     public static int INTAKE_MOTOR = 6;
+    public static int XBOX_LEFT_X_AXIS = 0;
+    public static int XBOX_LEFT_Y_AXIS = 1;
 
 }

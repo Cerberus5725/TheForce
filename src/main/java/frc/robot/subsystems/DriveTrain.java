@@ -17,7 +17,7 @@ public class DriveTrain extends SubsystemBase {
   /**
    * Creates a new DriveTrain.
    */
-  public double dSpeed = Constants.DRIVETRAINSPEED;
+  private double dSpeed = Constants.DRIVETRAINSPEED;
   public static Spark leftMotorFront;
   public static Spark rightMotorFront;
   public static Spark leftMotorBack;
@@ -43,8 +43,8 @@ public class DriveTrain extends SubsystemBase {
 
   public void driveWithJoysticks(XboxController controller)
 	{
-        double joystickX = controller.getX();
-        double joystickY = controller.getY();
+        double joystickX = controller.getRawAxis(Constants.XBOX_LEFT_X_AXIS);
+        double joystickY = -controller.getRawAxis(Constants.XBOX_LEFT_Y_AXIS);
         double motorLeft;
         double motorRight;
         motorLeft = (joystickX + joystickY) *dSpeed;
