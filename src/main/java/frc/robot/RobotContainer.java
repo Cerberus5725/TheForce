@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.DriveWithJoySticks;
 import frc.robot.commands.EjectBallOut;
+import frc.robot.commands.InvertDriveTrain;
 import frc.robot.commands.TakeBallIn;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
@@ -29,11 +30,11 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveTrain driveTrain;
   private final DriveWithJoySticks joystickDrive;
+  private final InvertDriveTrain joystickInvert;
   public static XboxController driverJoystick;
 
   private final Intake intake;
   private final AutonomousCommand auto;
-
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -45,6 +46,9 @@ public class RobotContainer {
     joystickDrive.addRequirements(driveTrain);
     driveTrain.setDefaultCommand(joystickDrive);
     driverJoystick = new XboxController(Constants.JOYSTICK_NUMBER);
+    joystickInvert = new InvertDriveTrain(driveTrain);
+    joystickInvert.addRequirements(driveTrain);
+
 
     intake = new Intake();
     auto = new AutonomousCommand();
@@ -64,6 +68,9 @@ public class RobotContainer {
 
     JoystickButton ejectButton = new JoystickButton(driverJoystick, XboxController.Button.kBumperLeft.value);
     ejectButton.whileHeld(new EjectBallOut(intake));
+
+    JoystickButton invertButton = new JoystickButton(driverJoystick, XboxController.Button.kX.value);
+    invertButton.whenPressed(new InvertDriveTrain(driveTrain));
   }
 
 

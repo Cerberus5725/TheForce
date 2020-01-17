@@ -17,11 +17,14 @@ public class DriveTrain extends SubsystemBase {
   /**
    * Creates a new DriveTrain.
    */
+  public boolean inverted = false;
+
   private double dSpeed = Constants.DRIVETRAINSPEED;
   public static Spark leftMotorFront;
   public static Spark rightMotorFront;
   public static Spark leftMotorBack;
   public static Spark rightMotorBack;
+  
   
   public DriveTrain() {
     leftMotorFront = new Spark(Constants.LEFT_FRONT_MOTOR);
@@ -43,10 +46,12 @@ public class DriveTrain extends SubsystemBase {
 
   public void driveWithJoysticks(XboxController controller)
 	{
-        double joystickX = controller.getRawAxis(Constants.XBOX_LEFT_X_AXIS);
-        double joystickY = -controller.getRawAxis(Constants.XBOX_LEFT_Y_AXIS);
-        double motorLeft;
-        double motorRight;
+    double joystickX = controller.getRawAxis(Constants.XBOX_LEFT_X_AXIS);
+    double joystickY = -controller.getRawAxis(Constants.XBOX_LEFT_Y_AXIS);
+    double motorLeft;
+    double motorRight;
+      if(!inverted)
+      {
         motorLeft = (joystickX + joystickY) *dSpeed;
         motorRight = (-joystickX + joystickY) *dSpeed;
         if(motorLeft >= 1.0)
@@ -63,6 +68,38 @@ public class DriveTrain extends SubsystemBase {
         rightMotorBack.set(motorRight);
         System.out.println("Motor Left: " + motorLeft);
         System.out.println("Motor Right: " + motorRight);
+      }
+      else
+      {
+        motorLeft = (-joystickX - joystickY) *dSpeed;
+        motorRight = (joystickX - joystickY) *dSpeed;
+        if(motorLeft >= 1.0)
+        {
+            motorLeft = 1.0;
+        }
+        if(motorRight >= 1.0)
+        {
+            motorRight = 1.0;
+        }
+        leftMotorFront.set(motorLeft);
+        rightMotorFront.set(motorRight);
+        leftMotorBack.set(motorLeft);
+        rightMotorBack.set(motorRight);
+        System.out.println("Motor Left Inverted: " + motorLeft);
+        System.out.println("Motor Right Inverted: " + motorRight);
+      }
+    }
+
+    public void switchDirection()
+    {
+    	if(!inverted)
+    	{
+    		inverted = true;
+    	}
+    	else
+    	{
+    		inverted = false;
+    	}
     }
 
     public void stop()
