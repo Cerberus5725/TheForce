@@ -11,11 +11,13 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.DriveWithJoySticks;
-import frc.robot.commands.EjectBallOut;
 import frc.robot.commands.InvertDriveTrain;
-import frc.robot.commands.TakeBallIn;
+import frc.robot.commands.IntakeSystem;
+import frc.robot.commands.ShootBall;
+import frc.robot.commands.ShootReturner;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.BallShooter;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants;
@@ -32,8 +34,10 @@ public class RobotContainer {
   private final DriveWithJoySticks joystickDrive;
   private final InvertDriveTrain joystickInvert;
   public static XboxController driverJoystick;
+  public final BallShooter shooter;
 
   private final Intake intake;
+  private final IntakeSystem intakeSystem;
   private final AutonomousCommand auto;
 
   /**
@@ -45,12 +49,18 @@ public class RobotContainer {
     joystickDrive = new DriveWithJoySticks(driveTrain);
     joystickDrive.addRequirements(driveTrain);
     driveTrain.setDefaultCommand(joystickDrive);
+
+    intake = new Intake();
+    intakeSystem = new IntakeSystem(intake);
+    intakeSystem.addRequirements(intake);
+    intake.setDefaultCommand(intakeSystem);
+
     driverJoystick = new XboxController(Constants.JOYSTICK_NUMBER);
     joystickInvert = new InvertDriveTrain(driveTrain);
     joystickInvert.addRequirements(driveTrain);
 
+    shooter = new BallShooter();
 
-    intake = new Intake();
     auto = new AutonomousCommand();
 
     configureButtonBindings();
@@ -63,11 +73,12 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    JoystickButton intakeButton = new JoystickButton(driverJoystick, XboxController.Button.kBumperRight.value);
-    intakeButton.whileHeld(new TakeBallIn(intake));
 
-    JoystickButton ejectButton = new JoystickButton(driverJoystick, XboxController.Button.kBumperLeft.value);
-    ejectButton.whileHeld(new EjectBallOut(intake));
+    JoystickButton shootButton = new JoystickButton(driverJoystick,XboxController.Button.kBumperRight.value);
+    shootButton.whileHeld(new ShootBall(shooter));
+
+    JoystickButton shootReturnButton = new JoystickButton(driverJoystick,XboxController.Button.kBumperLeft.value);
+    shootReturnButton.whileHeld(new ShootReturner(shooter));
 
     JoystickButton invertButton = new JoystickButton(driverJoystick, XboxController.Button.kX.value);
     invertButton.whenPressed(new InvertDriveTrain(driveTrain));

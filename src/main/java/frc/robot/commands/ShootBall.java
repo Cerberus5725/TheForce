@@ -5,20 +5,21 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.BallShooter;
 
-public class EjectBallOut extends CommandBase {
-  Intake intake;
+public class ShootBall extends CommandBase {
+ BallShooter shooter;
   /**
-   * Creates a new EjectBallOut.
+   * Creates a new TakeBallIn.
    */
-  public EjectBallOut(Intake i) {
-    intake = i;
+  public ShootBall(BallShooter s) {
+    shooter = s;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(intake);
+    addRequirements(shooter);
   }
 
   // Called when the command is initially scheduled.
@@ -29,13 +30,13 @@ public class EjectBallOut extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intake.ejectBallOut();
+  shooter.shootBall();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    intake.stop();
+    shooter.stop();
   }
 
   // Returns true when the command should end.

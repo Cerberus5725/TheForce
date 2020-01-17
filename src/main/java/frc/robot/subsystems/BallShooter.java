@@ -8,33 +8,42 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class Intake extends SubsystemBase {
+public class BallShooter extends SubsystemBase {
   /**
    * Creates a new Intake.
    */
-  private Spark intakeRoller;
-  public double intakeSpeed = Constants.INTAKESPEED;
-  public Intake() {
-    intakeRoller = new Spark(Constants.INTAKE_MOTOR);
-    addChild("IntakeRoller", intakeRoller);
-    intakeRoller.setInverted(false);
+  private Spark shootRollerLeft;
+  private Spark shootRollerRight;
+  public double shootSpeed = Constants.SHOOTERSPEED;
+  public BallShooter() {
+    shootRollerLeft = new Spark(Constants.SHOOT_MOTOR_LEFT);
+    addChild("ShootRollerLeft", shootRollerLeft);
+    shootRollerLeft.setInverted(false);
+    
+    shootRollerRight = new Spark(Constants.SHOOT_MOTOR_RIGHT);
+    addChild("ShootRollerRight", shootRollerRight);
+    shootRollerRight.setInverted(false);
   }
 
- public void intakeSystem(XboxController controller)
- {
-  double leftTrigger = controller.getX();
-  double rightTrigger = controller.getY();
-  double intakeValue = (leftTrigger - rightTrigger) * Constants.INTAKESPEED;
-  intakeRoller.set(intakeValue);
- }
+  public void shootBall()
+  {
+   shootRollerLeft.set(shootSpeed);
+   shootRollerRight.set(shootSpeed);
+  }
+
+  public void shootReturner()
+  {
+   shootRollerLeft.set(-shootSpeed);
+   shootRollerRight.set(-shootSpeed);
+  }
 
   public void stop()
   {
-   intakeRoller.set(0);
+   shootRollerLeft.set(0);
+   shootRollerRight.set(0);
   }
 
   @Override
