@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -26,10 +27,12 @@ public class Intake extends SubsystemBase {
 
  public void intakeSystem(XboxController controller)
  {
-  double leftTrigger = controller.getX();
-  double rightTrigger = controller.getY();
+  double leftTrigger = controller.getTriggerAxis(Hand.kLeft);
+  double rightTrigger = controller.getTriggerAxis(Hand.kRight);
   double intakeValue = (leftTrigger - rightTrigger) * Constants.INTAKESPEED;
+  //System.out.println("Intake: " + intakeValue);
   intakeRoller.set(intakeValue);
+
  }
 
   public void stop()

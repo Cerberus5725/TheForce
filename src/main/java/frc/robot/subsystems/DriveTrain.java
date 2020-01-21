@@ -26,6 +26,7 @@ public class DriveTrain extends SubsystemBase {
   public static Spark rightMotorBack;
   
   
+  
   public DriveTrain() {
     leftMotorFront = new Spark(Constants.LEFT_FRONT_MOTOR);
     addChild("LeftMotorFront",leftMotorFront);
@@ -33,7 +34,7 @@ public class DriveTrain extends SubsystemBase {
             
     rightMotorFront = new Spark(Constants.RIGHT_FRONT_MOTOR);
     addChild("RightMotorFront",rightMotorFront);
-    rightMotorFront.setInverted(false);
+    rightMotorFront.setInverted(true);
     
     leftMotorBack = new Spark(Constants.LEFT_BACK_MOTOR);
     addChild("LeftMotorBack",leftMotorBack);
@@ -41,7 +42,7 @@ public class DriveTrain extends SubsystemBase {
             
     rightMotorBack = new Spark(Constants.RIGHT_BACK_MOTOR);
     addChild("RightMotorBack",rightMotorBack);
-    rightMotorBack.setInverted(false);
+    rightMotorBack.setInverted(true);
   }
 
   public void driveWithJoysticks(XboxController controller)
@@ -66,13 +67,13 @@ public class DriveTrain extends SubsystemBase {
         rightMotorFront.set(motorRight);
         leftMotorBack.set(motorLeft);
         rightMotorBack.set(motorRight);
-        System.out.println("Motor Left: " + motorLeft);
-        System.out.println("Motor Right: " + motorRight);
+        //System.out.println("Motor Left: " + motorLeft);
+        //System.out.println("Motor Right: " + motorRight);
       }
       else
       {
-        motorLeft = (-joystickX - joystickY) *dSpeed;
-        motorRight = (joystickX - joystickY) *dSpeed;
+        motorLeft = (joystickX - joystickY) *dSpeed;
+        motorRight = (-joystickX - joystickY) *dSpeed;
         if(motorLeft >= 1.0)
         {
             motorLeft = 1.0;
@@ -85,8 +86,8 @@ public class DriveTrain extends SubsystemBase {
         rightMotorFront.set(motorRight);
         leftMotorBack.set(motorLeft);
         rightMotorBack.set(motorRight);
-        System.out.println("Motor Left Inverted: " + motorLeft);
-        System.out.println("Motor Right Inverted: " + motorRight);
+        //System.out.println("Motor Left Inverted: " + motorLeft);
+        //System.out.println("Motor Right Inverted: " + motorRight);
       }
     }
 

@@ -18,7 +18,7 @@ package frc.robot;
 public final class Constants {
     // Motor Speeds
     public static double DRIVETRAINSPEED = 0.55;
-    public static double INTAKESPEED = 0.7;
+    public static double INTAKESPEED = 1.00;
     public static double SHOOTERSPEED = 0.5;
     // Joystick Number
     public static int JOYSTICK_NUMBER = 0;
