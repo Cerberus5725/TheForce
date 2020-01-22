@@ -15,35 +15,27 @@ public class BallShooter extends SubsystemBase {
   /**
    * Creates a new Intake.
    */
-  private Spark shootRollerLeft;
-  private Spark shootRollerRight;
+  private Spark shootRoller;
   public double shootSpeed = Constants.SHOOTERSPEED;
   public BallShooter() {
-    shootRollerLeft = new Spark(Constants.SHOOT_MOTOR_LEFT);
-    addChild("ShootRollerLeft", shootRollerLeft);
-    shootRollerLeft.setInverted(false);
-    
-    shootRollerRight = new Spark(Constants.SHOOT_MOTOR_RIGHT);
-    addChild("ShootRollerRight", shootRollerRight);
-    shootRollerRight.setInverted(false);
+    shootRoller = new Spark(Constants.SHOOT_MOTOR);
+    addChild("ShootRoller", shootRoller);
+    shootRoller.setInverted(false);
   }
 
   public void shootBall()
   {
-   shootRollerLeft.set(shootSpeed);
-   shootRollerRight.set(shootSpeed);
+   shootRoller.set(shootSpeed);
   }
 
   public void shootReturner()
   {
-   shootRollerLeft.set(-shootSpeed);
-   shootRollerRight.set(-shootSpeed);
+   shootRoller.set(-shootSpeed);
   }
 
   public void stop()
   {
-   shootRollerLeft.set(0);
-   shootRollerRight.set(0);
+   shootRoller.set(0);
   }
 
   @Override

@@ -17,13 +17,17 @@ public class DriveTrain extends SubsystemBase {
   /**
    * Creates a new DriveTrain.
    */
+  double motorLeft;
+  double motorRight;
   public boolean inverted = false;
 
   private double dSpeed = Constants.DRIVETRAINSPEED;
+  private double aSpeed = Constants.SHOOTERSPEED;
   public static Spark leftMotorFront;
   public static Spark rightMotorFront;
   public static Spark leftMotorBack;
   public static Spark rightMotorBack;
+  
   
   
   
@@ -49,8 +53,7 @@ public class DriveTrain extends SubsystemBase {
 	{
     double joystickX = controller.getRawAxis(Constants.XBOX_LEFT_X_AXIS);
     double joystickY = -controller.getRawAxis(Constants.XBOX_LEFT_Y_AXIS);
-    double motorLeft;
-    double motorRight;
+
       if(!inverted)
       {
         motorLeft = (joystickX + joystickY) *dSpeed;
@@ -101,6 +104,50 @@ public class DriveTrain extends SubsystemBase {
     	{
     		inverted = false;
     	}
+    }
+
+    public void driveForward()
+    {
+       motorLeft = aSpeed;
+       motorRight = aSpeed;
+
+       leftMotorFront.set(motorLeft);
+       rightMotorFront.set(motorRight);
+       leftMotorBack.set(motorLeft);
+       rightMotorBack.set(motorRight);
+    }
+
+    public void driveBackward()
+    {
+       motorLeft = -aSpeed;
+       motorRight = -aSpeed;
+
+       leftMotorFront.set(motorLeft);
+       rightMotorFront.set(motorRight);
+       leftMotorBack.set(motorLeft);
+       rightMotorBack.set(motorRight);
+    }
+
+    public void driveLeft()
+    {
+      motorLeft = aSpeed;
+      motorRight = -aSpeed;
+
+      leftMotorFront.set(motorLeft);
+      rightMotorFront.set(motorRight);
+      leftMotorBack.set(motorLeft);
+      rightMotorBack.set(motorRight);
+    }
+
+    public void driveRight()
+    {
+      motorLeft = -aSpeed;
+      motorRight = aSpeed;
+
+      leftMotorFront.set(motorLeft);
+      rightMotorFront.set(motorRight);
+      leftMotorBack.set(motorLeft);
+      rightMotorBack.set(motorRight);
     }
 
     public void stop()

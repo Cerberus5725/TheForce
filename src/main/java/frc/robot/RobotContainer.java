@@ -15,11 +15,16 @@ import frc.robot.commands.InvertDriveTrain;
 import frc.robot.commands.IntakeSystem;
 import frc.robot.commands.ShootBall;
 import frc.robot.commands.ShootReturner;
+import frc.robot.commands.DriveForward;
+import frc.robot.commands.DriveBackward;
+import frc.robot.commands.DriveLeft;
+import frc.robot.commands.DriveRight;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.BallShooter;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants;
 
 /**
@@ -32,7 +37,12 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveTrain driveTrain;
   private final DriveWithJoySticks joystickDrive;
+  private final DriveForward driveForward;
+  private final DriveBackward driveBackward;
+  private final DriveLeft driveLeft;
+  private final DriveRight driveRight;
   private final InvertDriveTrain joystickInvert;
+  
   public static XboxController driverJoystick;
   public final BallShooter shooter;
 
@@ -59,6 +69,15 @@ public class RobotContainer {
     joystickInvert = new InvertDriveTrain(driveTrain);
     joystickInvert.addRequirements(driveTrain);
 
+    driveForward = new DriveForward(driveTrain);
+    driveForward.addRequirements(driveTrain);
+    driveBackward = new DriveBackward(driveTrain);
+    driveBackward.addRequirements(driveTrain);    
+    driveLeft = new DriveLeft(driveTrain);
+    driveLeft.addRequirements(driveTrain);
+    driveRight = new DriveRight(driveTrain);
+    driveRight.addRequirements(driveTrain);
+
     shooter = new BallShooter();
 
     auto = new AutonomousCommand();
@@ -80,8 +99,21 @@ public class RobotContainer {
     JoystickButton shootReturnButton = new JoystickButton(driverJoystick,XboxController.Button.kBumperLeft.value);
     shootReturnButton.whileHeld(new ShootReturner(shooter));
 
-    JoystickButton invertButton = new JoystickButton(driverJoystick, XboxController.Button.kX.value);
+    JoystickButton invertButton = new JoystickButton(driverJoystick, XboxController.Button.kStickLeft.value);
     invertButton.whenPressed(new InvertDriveTrain(driveTrain));
+
+    POVButton driveForwardButton = new POVButton(driverJoystick, 0);
+    driveForwardButton.whileHeld(new DriveForward(driveTrain));
+
+    POVButton driveBackwardButton = new POVButton(driverJoystick, 180);
+    driveBackwardButton.whileHeld(new DriveBackward(driveTrain));
+
+    POVButton driveLeftButton = new POVButton(driverJoystick, 90);
+    driveLeftButton.whileHeld(new DriveLeft(driveTrain));
+
+    POVButton driveRightButton = new POVButton(driverJoystick, 270);
+    driveRightButton.whileHeld(new DriveRight(driveTrain));
+
   }
 
 

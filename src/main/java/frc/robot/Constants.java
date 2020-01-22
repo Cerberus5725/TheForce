@@ -18,7 +18,8 @@ package frc.robot;
 public final class Constants {
     // Motor Speeds
     public static double DRIVETRAINSPEED = 0.55;
-    public static double INTAKESPEED = 1.00;
+    public static double AUTONOMOUSSPEED = 0.3;
+    public static double INTAKESPEED = 0.75;
     public static double SHOOTERSPEED = 0.5;
     // Joystick Number
     public static int JOYSTICK_NUMBER = 0;
@@ -27,9 +28,10 @@ public final class Constants {
     public static int LEFT_BACK_MOTOR = 1;
     public static int RIGHT_FRONT_MOTOR = 2;
     public static int RIGHT_BACK_MOTOR = 3;
-    public static int SHOOT_MOTOR_LEFT = 4;
-    public static int SHOOT_MOTOR_RIGHT = 5;
+    //Shoot and Intake PWM Numbers
+    public static int SHOOT_MOTOR = 5;
     public static int INTAKE_MOTOR = 6;
+    //Axis Numbers
     public static int XBOX_LEFT_X_AXIS = 0;
     public static int XBOX_LEFT_Y_AXIS = 1;
 }
