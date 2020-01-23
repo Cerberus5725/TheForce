@@ -35,19 +35,24 @@ import frc.robot.Constants;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
+
+  //Drivetrain
   private final DriveTrain driveTrain;
   private final DriveWithJoySticks joystickDrive;
   private final DriveForward driveForward;
   private final DriveBackward driveBackward;
   private final DriveLeft driveLeft;
   private final DriveRight driveRight;
-  private final InvertDriveTrain joystickInvert;
-  
-  public static XboxController driverJoystick;
-  public final BallShooter shooter;
 
+  //Joystick
+  public static XboxController driverJoystick;
+  private final InvertDriveTrain joystickInvert;
+
+  //Intake and Shooter
+  public final BallShooter shooter;
   private final Intake intake;
   private final IntakeSystem intakeSystem;
+
   private final AutonomousCommand auto;
 
   /**
@@ -55,20 +60,25 @@ public class RobotContainer {
    */
   public RobotContainer() {
     // Configure the button bindings
+
+    //Drivetrain Joystick
     driveTrain = new DriveTrain();
     joystickDrive = new DriveWithJoySticks(driveTrain);
     joystickDrive.addRequirements(driveTrain);
     driveTrain.setDefaultCommand(joystickDrive);
 
-    intake = new Intake();
-    intakeSystem = new IntakeSystem(intake);
-    intakeSystem.addRequirements(intake);
-    intake.setDefaultCommand(intakeSystem);
-
     driverJoystick = new XboxController(Constants.JOYSTICK_NUMBER);
     joystickInvert = new InvertDriveTrain(driveTrain);
     joystickInvert.addRequirements(driveTrain);
 
+    //Intake and Shooter
+    intake = new Intake();
+    intakeSystem = new IntakeSystem(intake);
+    intakeSystem.addRequirements(intake);
+    intake.setDefaultCommand(intakeSystem);
+    shooter = new BallShooter();
+
+    //Drive with DPad
     driveForward = new DriveForward(driveTrain);
     driveForward.addRequirements(driveTrain);
     driveBackward = new DriveBackward(driveTrain);
@@ -77,8 +87,6 @@ public class RobotContainer {
     driveLeft.addRequirements(driveTrain);
     driveRight = new DriveRight(driveTrain);
     driveRight.addRequirements(driveTrain);
-
-    shooter = new BallShooter();
 
     auto = new AutonomousCommand();
 
@@ -92,7 +100,7 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-
+    //Joystick Buttons
     JoystickButton shootButton = new JoystickButton(driverJoystick,XboxController.Button.kBumperRight.value);
     shootButton.whileHeld(new ShootBall(shooter));
 
@@ -102,6 +110,7 @@ public class RobotContainer {
     JoystickButton invertButton = new JoystickButton(driverJoystick, XboxController.Button.kStickLeft.value);
     invertButton.whenPressed(new InvertDriveTrain(driveTrain));
 
+    //Pov or Dpad Buttons
     POVButton driveForwardButton = new POVButton(driverJoystick, 0);
     driveForwardButton.whileHeld(new DriveForward(driveTrain));
 

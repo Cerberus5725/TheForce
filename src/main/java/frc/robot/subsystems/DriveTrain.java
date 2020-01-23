@@ -22,7 +22,7 @@ public class DriveTrain extends SubsystemBase {
   public boolean inverted = false;
 
   private double dSpeed = Constants.DRIVETRAINSPEED;
-  private double aSpeed = Constants.SHOOTERSPEED;
+  private double aSpeed = Constants.AUTONOMOUSSPEED;
   public static Spark leftMotorFront;
   public static Spark rightMotorFront;
   public static Spark leftMotorBack;
@@ -108,8 +108,17 @@ public class DriveTrain extends SubsystemBase {
 
     public void driveForward()
     {
+      if(!inverted)
+      {
        motorLeft = aSpeed;
        motorRight = aSpeed;
+      }
+
+      else
+      {
+        motorLeft = -aSpeed;
+        motorRight = -aSpeed;
+      }
 
        leftMotorFront.set(motorLeft);
        rightMotorFront.set(motorRight);
@@ -119,9 +128,17 @@ public class DriveTrain extends SubsystemBase {
 
     public void driveBackward()
     {
+      if(!inverted)
+      {
        motorLeft = -aSpeed;
        motorRight = -aSpeed;
+      }
 
+      else
+      {
+        motorLeft = aSpeed;
+        motorRight = aSpeed;
+      }
        leftMotorFront.set(motorLeft);
        rightMotorFront.set(motorRight);
        leftMotorBack.set(motorLeft);
@@ -130,8 +147,17 @@ public class DriveTrain extends SubsystemBase {
 
     public void driveLeft()
     {
-      motorLeft = aSpeed;
-      motorRight = -aSpeed;
+      if(!inverted)
+      {
+       motorLeft = aSpeed;
+       motorRight = -aSpeed;
+      }
+
+      else
+      {
+        motorLeft = -aSpeed;
+        motorRight = aSpeed;
+      }
 
       leftMotorFront.set(motorLeft);
       rightMotorFront.set(motorRight);
@@ -141,9 +167,17 @@ public class DriveTrain extends SubsystemBase {
 
     public void driveRight()
     {
-      motorLeft = -aSpeed;
-      motorRight = aSpeed;
+      if(!inverted)
+      {
+       motorLeft = -aSpeed;
+       motorRight = aSpeed;
+      }
 
+      else
+      {
+        motorLeft = aSpeed;
+        motorRight = -aSpeed;
+      }
       leftMotorFront.set(motorLeft);
       rightMotorFront.set(motorRight);
       leftMotorBack.set(motorLeft);
