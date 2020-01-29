@@ -5,14 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.BallShooter;
+
 
 public class ShootBall extends CommandBase {
  BallShooter shooter;
+ Timer timer;
+ 
   /**
    * Creates a new TakeBallIn.
    */
@@ -20,22 +24,32 @@ public class ShootBall extends CommandBase {
     shooter = s;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shooter);
+    timer = new Timer();
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    timer.reset();
+    timer.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
   shooter.shootBall();
+  System.out.println("Timer: " + timer.get());
+  if (timer.get() > Constants.PRELOAD_TIME)
+  {
+    shooter.openGate();
+  }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
+  public void end(boolean interrupted) {   
+    timer.stop();
+    shooter.closeGate(); 
     shooter.stop();
   }
 

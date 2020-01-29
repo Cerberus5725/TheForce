@@ -13,11 +13,13 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
+
 public class Intake extends SubsystemBase {
   /**
    * Creates a new Intake.
    */
   private Spark intakeRoller;
+  
   public double intakeSpeed = Constants.INTAKESPEED;
   public Intake() {
     intakeRoller = new Spark(Constants.INTAKE_MOTOR);
@@ -32,7 +34,6 @@ public class Intake extends SubsystemBase {
   double intakeValue = (leftTrigger - rightTrigger) * Constants.INTAKESPEED;
   //System.out.println("Intake: " + intakeValue);
   intakeRoller.set(intakeValue);
-
  }
 
   public void stop()

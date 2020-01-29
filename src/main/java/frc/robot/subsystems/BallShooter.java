@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj.Servo;
 
 public class BallShooter extends SubsystemBase {
   /**
@@ -17,10 +18,13 @@ public class BallShooter extends SubsystemBase {
    */
   private Spark shootRoller;
   public double shootSpeed = Constants.SHOOTERSPEED;
+  private Servo gate;
   public BallShooter() {
     shootRoller = new Spark(Constants.SHOOT_MOTOR);
     addChild("ShootRoller", shootRoller);
     shootRoller.setInverted(false);
+    gate = new Servo(Constants.GATE_PWM);
+    gate.setAngle(90);
   }
 
   public void shootBall()
@@ -32,6 +36,22 @@ public class BallShooter extends SubsystemBase {
   {
    shootRoller.set(-shootSpeed);
   }
+
+  public void openGate()
+  {
+    gate.setAngle(180);
+  }
+ 
+  public void closeGate()
+  {
+    gate.setAngle(90);
+  }
+
+  public void reverseGate()
+  {
+    gate.setAngle(0);
+  }
+ 
 
   public void stop()
   {

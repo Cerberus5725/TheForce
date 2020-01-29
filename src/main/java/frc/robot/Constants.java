@@ -20,7 +20,7 @@ public final class Constants {
     public static double DRIVETRAINSPEED = 0.55;
     public static double AUTONOMOUSSPEED = 0.3;
     public static double INTAKESPEED = 1.00;
-    public static double SHOOTERSPEED = 0.5;
+    public static double SHOOTERSPEED = 0.75;
     // Joystick Number
     public static int JOYSTICK_NUMBER = 0;
     // Motor PWM Numbers
@@ -31,6 +31,8 @@ public final class Constants {
     //Shoot and Intake PWM Numbers
     public static int SHOOT_MOTOR = 5;
     public static int INTAKE_MOTOR = 6;
+    public static int GATE_PWM = 7;
+    public static double PRELOAD_TIME = 2.0;
     //Axis Numbers
     public static int XBOX_LEFT_X_AXIS = 0;
     public static int XBOX_LEFT_Y_AXIS = 1;
