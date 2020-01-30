@@ -133,7 +133,6 @@ public class DriveTrain extends SubsystemBase {
        motorLeft = -aSpeed;
        motorRight = -aSpeed;
       }
-
       else
       {
         motorLeft = aSpeed;
@@ -147,17 +146,10 @@ public class DriveTrain extends SubsystemBase {
 
     public void driveLeft()
     {
-      if(!inverted)
-      {
        motorLeft = aSpeed;
        motorRight = -aSpeed;
-      }
-
-      else
-      {
-        motorLeft = -aSpeed;
-        motorRight = aSpeed;
-      }
+       motorLeft = aSpeed;
+       motorRight = -aSpeed;
 
       leftMotorFront.set(motorLeft);
       rightMotorFront.set(motorRight);
@@ -167,17 +159,10 @@ public class DriveTrain extends SubsystemBase {
 
     public void driveRight()
     {
-      if(!inverted)
-      {
        motorLeft = -aSpeed;
        motorRight = aSpeed;
-      }
-
-      else
-      {
-        motorLeft = aSpeed;
-        motorRight = -aSpeed;
-      }
+       motorLeft = -aSpeed;
+       motorRight = aSpeed;    
       leftMotorFront.set(motorLeft);
       rightMotorFront.set(motorRight);
       leftMotorBack.set(motorLeft);

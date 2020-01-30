@@ -31,7 +31,7 @@ public class Intake extends SubsystemBase {
  {
   double leftTrigger = controller.getTriggerAxis(Hand.kLeft);
   double rightTrigger = controller.getTriggerAxis(Hand.kRight);
-  double intakeValue = (leftTrigger - rightTrigger) * Constants.INTAKESPEED;
+  double intakeValue = (rightTrigger - leftTrigger) * Constants.INTAKESPEED;
   //System.out.println("Intake: " + intakeValue);
   intakeRoller.set(intakeValue);
  }
