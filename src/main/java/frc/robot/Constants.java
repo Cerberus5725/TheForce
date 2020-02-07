@@ -21,6 +21,10 @@ public final class Constants {
     public static double AUTONOMOUSSPEED = 0.3;
     public static double INTAKESPEED = 1.00;
     public static double SHOOTERSPEED = 0.75;
+    public static double SPINNERSPEED = 0.25;
+    public static double LIFTUP = 0.8;
+    public static double LIFTDROP = 0.4;
+    public static double WINCHSPEED = 0.5;
     // Joystick Number
     public static int JOYSTICK_NUMBER = 0;
     // Motor PWM Numbers
@@ -33,7 +37,13 @@ public final class Constants {
     public static int INTAKE_MOTOR = 6;
     public static int GATE_PWM = 7;
     public static double PRELOAD_TIME = 2.0;
+    //Lazy Susan PMW Numbers
+    public static int LAZY_SPINNER_MOTOR = 8;
+    public static int LAZY_LIFT_MOTOR = 9;
+    //Climb PMW Numbers
+    public static int WINCH_MOTOR = 4;    
     //Axis Numbers
     public static int XBOX_LEFT_X_AXIS = 0;
     public static int XBOX_LEFT_Y_AXIS = 1;
+    public static int XBOX_RIGHT_Y_AXIS = 5;
 }

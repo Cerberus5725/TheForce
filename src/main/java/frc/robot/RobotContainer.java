@@ -15,13 +15,20 @@ import frc.robot.commands.InvertDriveTrain;
 import frc.robot.commands.IntakeSystem;
 import frc.robot.commands.ShootBall;
 import frc.robot.commands.ShootReturner;
+import frc.robot.commands.SpinWheelLeft;
+import frc.robot.commands.SpinWheelRight;
+import frc.robot.commands.SusanLift;
+import frc.robot.commands.SusanLower;
+import frc.robot.commands.WinchStick;
 import frc.robot.commands.DriveForward;
 import frc.robot.commands.DriveBackward;
 import frc.robot.commands.DriveLeft;
 import frc.robot.commands.DriveRight;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.LazySusan;
 import frc.robot.subsystems.BallShooter;
+import frc.robot.subsystems.Climb;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
@@ -52,6 +59,19 @@ public class RobotContainer {
   public final BallShooter shooter;
   private final Intake intake;
   private final IntakeSystem intakeSystem;
+
+  // Lazy Susan
+   private final LazySusan lazySusan;
+   private final SpinWheelLeft spinWheelLeft;
+   private final SpinWheelRight spinWheelRight;
+   private final SusanLift susanLift;
+   private final SusanLower susanLower;
+
+   //winch
+   private final Climb climb;
+   private final WinchStick winchStick;
+   
+
 
   private final AutonomousCommand auto;
 
@@ -88,6 +108,23 @@ public class RobotContainer {
     driveRight = new DriveRight(driveTrain);
     driveRight.addRequirements(driveTrain);
 
+    //Lazy Susan
+    lazySusan = new LazySusan();
+    spinWheelLeft = new SpinWheelLeft(lazySusan);
+    spinWheelLeft.addRequirements(lazySusan);
+    spinWheelRight = new SpinWheelRight(lazySusan);
+    spinWheelRight.addRequirements(lazySusan);
+    susanLower = new SusanLower(lazySusan);
+    susanLower.addRequirements(lazySusan);
+    susanLift = new SusanLift(lazySusan);
+    susanLift.addRequirements(lazySusan);
+
+    //Winch
+    climb = new Climb();
+    winchStick = new WinchStick(climb);
+    winchStick.addRequirements(climb);
+    climb.setDefaultCommand(winchStick);
+
     auto = new AutonomousCommand();
 
     configureButtonBindings();
@@ -122,6 +159,19 @@ public class RobotContainer {
 
     POVButton driveRightButton = new POVButton(driverJoystick, 270);
     driveRightButton.whileHeld(new DriveRight(driveTrain));
+
+    //Letter Buttons
+    JoystickButton spinLeftButton = new JoystickButton(driverJoystick, XboxController.Button.kX.value);
+    spinLeftButton.whileHeld(new SpinWheelLeft(lazySusan));
+
+    JoystickButton spinRightButton = new JoystickButton(driverJoystick, XboxController.Button.kB.value);
+    spinRightButton.whileHeld(new SpinWheelRight(lazySusan));
+
+    JoystickButton susanUpButton = new JoystickButton(driverJoystick, XboxController.Button.kY.value);
+    susanUpButton.whileHeld(new SusanLift(lazySusan));
+
+    JoystickButton susanDownButton = new JoystickButton(driverJoystick, XboxController.Button.kA.value);
+    susanDownButton.whileHeld(new SusanLower(lazySusan));
 
   }
 
