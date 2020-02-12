@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -20,6 +21,8 @@ public class DriveTrain extends SubsystemBase {
   double motorLeft;
   double motorRight;
   public boolean inverted = false;
+  private final AnalogInput rangeFinderLeft = new AnalogInput(0);
+  private final AnalogInput rangeFinderRight = new AnalogInput(1);
 
   private double dSpeed = Constants.DRIVETRAINSPEED;
   private double aSpeed = Constants.AUTONOMOUSSPEED;
@@ -167,6 +170,14 @@ public class DriveTrain extends SubsystemBase {
       rightMotorFront.set(motorRight);
       leftMotorBack.set(motorLeft);
       rightMotorBack.set(motorRight);
+    }
+
+    public double getAverageDistanceToObject()
+    {
+    	//Rangefinder log code
+    	//System.out.println("Range Finder: " + String.valueOf(rangeFinder.getAverageVoltage()));
+      double rangeFinderAverage = (rangeFinderLeft.getAverageVoltage()+rangeFinderRight.getAverageVoltage())/2;
+      return rangeFinderAverage;	
     }
 
     public void stop()

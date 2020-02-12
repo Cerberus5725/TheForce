@@ -32,6 +32,8 @@ public class DriveForward extends CommandBase {
   public void execute() 
   {
     driveTrain.driveForward();
+    double distance = driveTrain.getAverageDistanceToObject();
+    System.out.println("Distance: " + distance);
   }
 
   // Called once the command ends or is interrupted.

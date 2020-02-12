@@ -7,10 +7,14 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Spark;
+//import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+//import com.revrobotics.CANError;
+import com.revrobotics.CANSparkMax;
+//import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import frc.robot.Constants;
 
 
@@ -18,13 +22,17 @@ public class Intake extends SubsystemBase {
   /**
    * Creates a new Intake.
    */
-  private Spark intakeRoller;
+  //private Spark intakeRoller;
+  private static final int deviceID = Constants.InakeCAN;
+  private CANSparkMax intakeRoller;
   
   public double intakeSpeed = Constants.INTAKESPEED;
   public Intake() {
-    intakeRoller = new Spark(Constants.INTAKE_MOTOR);
+    /*intakeRoller = new Spark(Constants.INTAKE_MOTOR);
     addChild("IntakeRoller", intakeRoller);
     intakeRoller.setInverted(false);
+    */
+    intakeRoller = new CANSparkMax(deviceID, MotorType.kBrushless);
   }
 
  public void intakeSystem(XboxController controller)
