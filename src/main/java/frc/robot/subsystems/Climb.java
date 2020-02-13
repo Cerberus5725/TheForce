@@ -7,22 +7,26 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Spark;
+//import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class Climb extends SubsystemBase {
   /**
    * Creates a new Climb.
    */
   public double winchSpeed = Constants.WINCHSPEED;
-  private Spark winchMotor;
+  //private Spark winchMotor;
+  private static final int deviceID = Constants.WINCH_CAN;
+  private CANSparkMax winchMotor;
   
   public Climb() {
-    winchMotor = new Spark(Constants.WINCH_MOTOR);
-    addChild("WinchMotor", winchMotor);
-    winchMotor.setInverted(false);
+    winchMotor = new CANSparkMax(deviceID, MotorType.kBrushless);
+    //("WinchMotor", winchMotor);
+    //winchMotor.setInverted(false);
   }
 
   

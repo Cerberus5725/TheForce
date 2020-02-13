@@ -20,7 +20,7 @@ public final class Constants {
     public static double DRIVETRAINSPEED = 0.55;
     public static double AUTONOMOUSSPEED = 0.3;
     public static double INTAKESPEED = 0.5;
-    public static double SHOOTERSPEED = 0.75;
+    public static double SHOOTERSPEED = 1.0;
     public static double SPINNERSPEED = 0.25;
     public static double LIFTUP = 0.8;
     public static double LIFTDROP = 0.4;
@@ -36,14 +36,15 @@ public final class Constants {
     public static int SHOOT_MOTOR = 5;
     //public static int INTAKE_MOTOR = 6;
     public static int GATE_PWM = 7;
-    public static double PRELOAD_TIME = 2.0;
-    // CAN #'s
-    public static int InakeCAN = 6;
+    public static double PRELOAD_TIME = 2.5;
     //Lazy Susan PMW Numbers
     public static int LAZY_SPINNER_MOTOR = 8;
     public static int LAZY_LIFT_MOTOR = 9;
     //Climb PMW Numbers
     public static int WINCH_MOTOR = 4;    
+    // CAN #'s
+    public static int INTAKE_CAN = 6;
+    public static int WINCH_CAN = 4;
     //Axis Numbers
     public static int XBOX_LEFT_X_AXIS = 0;
     public static int XBOX_LEFT_Y_AXIS = 1;

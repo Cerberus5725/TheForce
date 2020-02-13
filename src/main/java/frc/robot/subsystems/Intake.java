@@ -23,7 +23,7 @@ public class Intake extends SubsystemBase {
    * Creates a new Intake.
    */
   //private Spark intakeRoller;
-  private static final int deviceID = Constants.InakeCAN;
+  private static final int deviceID = Constants.INTAKE_CAN;
   private CANSparkMax intakeRoller;
   
   public double intakeSpeed = Constants.INTAKESPEED;
