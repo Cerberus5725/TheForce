@@ -22,9 +22,11 @@ public final class Constants {
     public static double INTAKESPEED = 0.5;
     public static double SHOOTERSPEED = 1.0;
     public static double SPINNERSPEED = 0.25;
-    public static double LIFTUP = 0.8;
-    public static double LIFTDROP = 0.4;
+    public static double LIFTUP = 0.3;
+    public static double LIFTDROP = 0.2;
     public static double WINCHSPEED = 0.5;
+    // DriveTrain SetPoint Distance
+    public static double SETPOINT_FORWARD = 1.4;
     // Joystick Number
     public static int JOYSTICK_NUMBER = 0;
     // Motor PWM Numbers
@@ -42,9 +44,10 @@ public final class Constants {
     public static int LAZY_LIFT_MOTOR = 9;
     //Climb PMW Numbers
     public static int WINCH_MOTOR = 4;    
-    // CAN #'s
+    // CAN Numbers's
     public static int INTAKE_CAN = 6;
     public static int WINCH_CAN = 4;
+    public static int LAZY_LIFT_CAN = 9;
     //Axis Numbers
     public static int XBOX_LEFT_X_AXIS = 0;
     public static int XBOX_LEFT_Y_AXIS = 1;

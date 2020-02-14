@@ -10,6 +10,11 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.DemandType;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class LazySusan extends SubsystemBase {
   /**
@@ -17,18 +22,21 @@ public class LazySusan extends SubsystemBase {
    */
   private VictorSP susanSpinner;
   public double spinnerSpeed = Constants.SPINNERSPEED;
-  private VictorSP susanLift;
+  //private VictorSP susanLift;
+  private TalonFX susanLift;
   public double liftUp = Constants.LIFTUP;
   public double liftDrop = Constants.LIFTDROP;
+
   public LazySusan() 
   {
     susanSpinner = new VictorSP(Constants.LAZY_SPINNER_MOTOR);
     addChild("SusanSpinner", susanSpinner);
     susanSpinner.setInverted(false);
 
-    susanLift = new VictorSP(Constants.LAZY_LIFT_MOTOR);
-    addChild("SusanLift", susanLift);
-    susanLift.setInverted(true);
+    //susanLift = new VictorSP(Constants.LAZY_LIFT_MOTOR);
+    susanLift = new TalonFX(Constants.LAZY_LIFT_CAN);
+    //addChild("SusanLift", susanLift);
+    //susanLift.setInverted(true);
   }
 
   public void spinWheelRight()
@@ -43,12 +51,12 @@ public class LazySusan extends SubsystemBase {
 
   public void liftSusan()
   {
-    susanLift.set(liftUp);
+    susanLift.set(ControlMode.PercentOutput,-liftUp);
   }
 
   public void lowerSusan()
   {
-    susanLift.set(-liftDrop);
+    susanLift.set(ControlMode.PercentOutput, liftDrop);
   }
 
   public void stopSpinner()
@@ -58,7 +66,7 @@ public class LazySusan extends SubsystemBase {
   
   public void stopLift()
   {
-    susanLift.set(0);
+    susanLift.set(ControlMode.PercentOutput,0);
   }
 
   @Override
