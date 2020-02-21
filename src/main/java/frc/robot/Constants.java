@@ -20,13 +20,19 @@ public final class Constants {
     public static double DRIVETRAINSPEED = 0.55;
     public static double AUTONOMOUSSPEED = 0.3;
     public static double INTAKESPEED = 0.5;
-    public static double SHOOTERSPEED = 1.0;
+    public static double SHOOTERSPEED = 0.65;
     public static double SPINNERSPEED = 0.25;
     public static double LIFTUP = 0.3;
     public static double LIFTDROP = 0.2;
     public static double WINCHSPEED = 0.5;
+    //Autononmous Variables
     // DriveTrain SetPoint Distance
-    public static double SETPOINT_FORWARD = 1.4;
+    public static double SETPOINT_FORWARD_CLOSE = 1.3;
+    public static double SETPOINT_FORWARD_FAR = 1.85;
+    // Auto joystick override tolerance
+    public static double JOYSTICK_OVERRIDE_TOLERANCE = 0.1;
+    public static double PRELOAD_TIME = 2.5;
+    public static double SHOOT_TIME = 5.0;
     // Joystick Number
     public static int JOYSTICK_NUMBER = 0;
     // Motor PWM Numbers
@@ -38,7 +44,6 @@ public final class Constants {
     public static int SHOOT_MOTOR = 5;
     //public static int INTAKE_MOTOR = 6;
     public static int GATE_PWM = 7;
-    public static double PRELOAD_TIME = 2.5;
     //Lazy Susan PMW Numbers
     public static int LAZY_SPINNER_MOTOR = 8;
     public static int LAZY_LIFT_MOTOR = 9;

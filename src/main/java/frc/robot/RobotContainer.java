@@ -24,7 +24,8 @@ import frc.robot.commands.DriveForward;
 import frc.robot.commands.DriveBackward;
 import frc.robot.commands.DriveLeft;
 import frc.robot.commands.DriveRight;
-import frc.robot.commands.DriveToDistance;
+import frc.robot.commands.DriveToDistanceClose;
+import frc.robot.commands.DriveToDistanceFar;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.LazySusan;
@@ -51,7 +52,8 @@ public class RobotContainer {
   private final DriveBackward driveBackward;
   private final DriveLeft driveLeft;
   private final DriveRight driveRight;
-  private final DriveToDistance driveToDistance;
+  private final DriveToDistanceClose driveToDistanceClose;
+  private final DriveToDistanceFar driveToDistanceFar;
 
   //Joystick
   public static XboxController driverJoystick;
@@ -107,8 +109,10 @@ public class RobotContainer {
     driveLeft.addRequirements(driveTrain);
     driveRight = new DriveRight(driveTrain);
     driveRight.addRequirements(driveTrain);
-    driveToDistance = new DriveToDistance(driveTrain);
-    driveToDistance.addRequirements(driveTrain);
+    driveToDistanceClose = new DriveToDistanceClose(driveTrain);
+    driveToDistanceClose.addRequirements(driveTrain);
+    driveToDistanceFar = new DriveToDistanceFar(driveTrain);
+    driveToDistanceFar.addRequirements(driveTrain);
 
     //Lazy Susan
     lazySusan = new LazySusan();
@@ -127,7 +131,7 @@ public class RobotContainer {
     winchStick.addRequirements(climb);
     climb.setDefaultCommand(winchStick);
 
-    auto = new AutonomousCommand();
+    auto = new AutonomousCommand(driveTrain, shooter);
 
     configureButtonBindings();
   }
@@ -149,8 +153,11 @@ public class RobotContainer {
     JoystickButton invertButton = new JoystickButton(driverJoystick, XboxController.Button.kStickLeft.value);
     invertButton.whenPressed(new InvertDriveTrain(driveTrain));
 
-    JoystickButton driveToButton = new JoystickButton(driverJoystick, XboxController.Button.kStickRight.value);
-    driveToButton.whenPressed(new DriveToDistance(driveTrain));
+    JoystickButton autoButtonRight = new JoystickButton(driverJoystick, XboxController.Button.kStart.value);
+    autoButtonRight.whenPressed(new AutonomousCommand(driveTrain, shooter));
+
+    JoystickButton autoButtonLeft = new JoystickButton(driverJoystick, XboxController.Button.kBack.value);
+    autoButtonLeft.whenPressed(new DriveToDistanceFar(driveTrain));
 
     //Pov or Dpad Buttons
     POVButton driveForwardButton = new POVButton(driverJoystick, 0);
