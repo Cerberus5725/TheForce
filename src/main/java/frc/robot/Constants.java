@@ -21,18 +21,21 @@ public final class Constants {
     public static double AUTONOMOUSSPEED = 0.3;
     public static double INTAKESPEED = 0.5;
     public static double SHOOTERSPEED = 0.65;
-    public static double SPINNERSPEED = 0.25;
-    public static double LIFTUP = 0.3;
-    public static double LIFTDROP = 0.2;
+    public static double SPINNERSPEED = 0.75;
+    public static double LIFTUP = 0.1;
+    public static double LIFTDROP = 0.1;
     public static double WINCHSPEED = 0.5;
     //Autononmous Variables
     // DriveTrain SetPoint Distance
-    public static double SETPOINT_FORWARD_CLOSE = 1.3;
-    public static double SETPOINT_FORWARD_FAR = 1.85;
+    public static double SETPOINT_FORWARD_CLOSE = 1.4;
+    public static double SETPOINT_FORWARD_FAR = 2.4;
+    public static double DRIVE_FORWARD_TIME = 1.0;
+    public static double DRIVE_BACKWARD_TIME = 1.0;
+    public static double TURN_TIME_90 = 1.0;
     // Auto joystick override tolerance
     public static double JOYSTICK_OVERRIDE_TOLERANCE = 0.1;
     public static double PRELOAD_TIME = 2.5;
-    public static double SHOOT_TIME = 5.0;
+    public static double SHOOT_TIME = 8.0;
     // Joystick Number
     public static int JOYSTICK_NUMBER = 0;
     // Motor PWM Numbers

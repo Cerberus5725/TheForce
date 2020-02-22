@@ -9,7 +9,10 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.AutonomousCommand;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import frc.robot.commands.AutonomousOne;
+import frc.robot.commands.AutonomousTwo;
 import frc.robot.commands.DriveWithJoySticks;
 import frc.robot.commands.InvertDriveTrain;
 import frc.robot.commands.IntakeSystem;
@@ -19,9 +22,13 @@ import frc.robot.commands.SpinWheelLeft;
 import frc.robot.commands.SpinWheelRight;
 import frc.robot.commands.SusanLift;
 import frc.robot.commands.SusanLower;
+import frc.robot.commands.TurnLeftTimed;
+import frc.robot.commands.TurnRightTimed;
 import frc.robot.commands.WinchStick;
 import frc.robot.commands.DriveForward;
+import frc.robot.commands.DriveForwardTimed;
 import frc.robot.commands.DriveBackward;
+import frc.robot.commands.DriveBackwardTimed;
 import frc.robot.commands.DriveLeft;
 import frc.robot.commands.DriveRight;
 import frc.robot.commands.DriveToDistanceClose;
@@ -54,6 +61,10 @@ public class RobotContainer {
   private final DriveRight driveRight;
   private final DriveToDistanceClose driveToDistanceClose;
   private final DriveToDistanceFar driveToDistanceFar;
+  private final DriveForwardTimed driveForwardTimed;
+  private final DriveBackwardTimed driveBackwardTimed;
+  private final TurnRightTimed turnRightTimed;
+  private final TurnLeftTimed turnLeftTimed;
 
   //Joystick
   public static XboxController driverJoystick;
@@ -74,7 +85,11 @@ public class RobotContainer {
    //winch
    private final Climb climb;
    private final WinchStick winchStick;
-   private final AutonomousCommand auto;
+   private final AutonomousOne autoOne;
+   private final AutonomousTwo autoTwo;
+
+   // A chooser for autonomous commands
+  SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -109,10 +124,21 @@ public class RobotContainer {
     driveLeft.addRequirements(driveTrain);
     driveRight = new DriveRight(driveTrain);
     driveRight.addRequirements(driveTrain);
+    // Autonomous DriveTrain Commands
     driveToDistanceClose = new DriveToDistanceClose(driveTrain);
     driveToDistanceClose.addRequirements(driveTrain);
     driveToDistanceFar = new DriveToDistanceFar(driveTrain);
     driveToDistanceFar.addRequirements(driveTrain);
+    driveForwardTimed = new DriveForwardTimed(driveTrain);
+    driveForwardTimed.addRequirements(driveTrain);
+    driveBackwardTimed = new DriveBackwardTimed(driveTrain);
+    driveBackwardTimed.addRequirements(driveTrain);
+    turnRightTimed = new TurnRightTimed(driveTrain);
+    turnRightTimed.addRequirements(driveTrain);
+    turnLeftTimed = new TurnLeftTimed(driveTrain);
+    turnLeftTimed.addRequirements(driveTrain);
+
+
 
     //Lazy Susan
     lazySusan = new LazySusan();
@@ -131,8 +157,15 @@ public class RobotContainer {
     winchStick.addRequirements(climb);
     climb.setDefaultCommand(winchStick);
 
-    auto = new AutonomousCommand(driveTrain, shooter);
+    // Initialize autonomous commands here as they need the depend subsystems and commands initialized first.
+    autoOne = new AutonomousOne(driveTrain, shooter);
+    autoTwo = new AutonomousTwo(driveTrain, shooter);
 
+    m_chooser.addOption("Auto One", autoOne);
+    m_chooser.addOption("Auto Two", autoTwo);
+
+    // Put the chooser on the dashboard
+    Shuffleboard.getTab("Autonomous").add(m_chooser);
     configureButtonBindings();
   }
 
@@ -154,10 +187,10 @@ public class RobotContainer {
     invertButton.whenPressed(new InvertDriveTrain(driveTrain));
 
     JoystickButton autoButtonRight = new JoystickButton(driverJoystick, XboxController.Button.kStart.value);
-    autoButtonRight.whenPressed(new AutonomousCommand(driveTrain, shooter));
+    autoButtonRight.whenPressed(new AutonomousOne(driveTrain, shooter));
 
     JoystickButton autoButtonLeft = new JoystickButton(driverJoystick, XboxController.Button.kBack.value);
-    autoButtonLeft.whenPressed(new DriveToDistanceFar(driveTrain));
+    autoButtonLeft.whenPressed(new AutonomousTwo(driveTrain, shooter));
 
     //Pov or Dpad Buttons
     POVButton driveForwardButton = new POVButton(driverJoystick, 0);
@@ -193,8 +226,8 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
+
   public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
-    return auto;
+    return m_chooser.getSelected();
   }
 }
