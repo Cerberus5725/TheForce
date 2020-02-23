@@ -10,6 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.BallShooter;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Intake;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -19,7 +20,7 @@ public class AutonomousOne extends SequentialCommandGroup {
   /**
    * Creates a new AutonomousCommand.
    */
-  public AutonomousOne(DriveTrain dt, BallShooter bs) {
-  addCommands(new DriveToDistanceClose(dt), new AutoShoot(bs));
+  public AutonomousOne(DriveTrain dt, BallShooter bs, Intake i) {
+  addCommands(new DriveForwardTimed(dt),new DriveToDistanceClose(dt), new AutoShoot(bs,i));
   }
 }

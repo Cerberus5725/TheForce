@@ -7,7 +7,7 @@
 
 package frc.robot.subsystems;
 
-//import java.util.Arrays;
+import java.util.Arrays;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Spark;
@@ -180,14 +180,18 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public double getAverageDistanceToObject()
-    {
-    	//Rangefinder log code
-      //System.out.println("Range Finder: " + String.valueOf(rangeFinder.getAverageVoltage()));
-      /*double ranges[] = new double[10]; 
+    { 
+      /* This code has been improved to get the median value rather than the average.
+         The median will help eliminate any single misreads to improve accuracy.
+         The length of the ranges array can be changed to tune but should be given
+         an even number to ensure an equal number of readings from each rangefinder.
+      */
+      double rangeFinderAverage = 0.0;
+      double ranges[] = new double[10]; 
       for(int i = 0; i < ranges.length;i++)
       {
         // Alternate getting ranges from both ranges and storing them in a set.
-        if(ranges[i]%2 != 0)
+        if(i%2 != 0)
         {
           ranges[i] = rangeFinderLeft.getAverageVoltage();
         }
@@ -198,10 +202,18 @@ public class DriveTrain extends SubsystemBase {
       }
       Arrays.sort(ranges);
       System.out.printf("Sorted Array: %s", Arrays.toString(ranges));
-      //Get the average of the 2 middle values
-      double rangeFinderAverage = ((ranges[ranges.length/2] + ranges[(ranges.length/2)-1])/2);
-      */
-      double rangeFinderAverage = (rangeFinderLeft.getAverageVoltage()+rangeFinderRight.getAverageVoltage())/2;
+      //Get the average of the 2 middle values if even or just the middle value if odd numbered array length
+      if(ranges.length%2 == 0.0)
+      {
+      rangeFinderAverage = ((ranges[ranges.length/2] + ranges[(ranges.length/2)-1])/2);
+      }
+      else
+      {
+      rangeFinderAverage = ranges[ranges.length/2];
+      }
+      // Simple get and divide both ranges
+      //double rangeFinderAverage = (rangeFinderLeft.getAverageVoltage()+rangeFinderRight.getAverageVoltage())/2;
+      //System.out.println("Range Finder: " + rangeFinderAverage);
       return rangeFinderAverage;	
     }
 

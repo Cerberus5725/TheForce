@@ -158,11 +158,12 @@ public class RobotContainer {
     climb.setDefaultCommand(winchStick);
 
     // Initialize autonomous commands here as they need the depend subsystems and commands initialized first.
-    autoOne = new AutonomousOne(driveTrain, shooter);
-    autoTwo = new AutonomousTwo(driveTrain, shooter);
+    autoOne = new AutonomousOne(driveTrain, shooter, intake);
+    autoTwo = new AutonomousTwo(driveTrain, shooter, intake);
 
     m_chooser.addOption("Auto One", autoOne);
     m_chooser.addOption("Auto Two", autoTwo);
+    m_chooser.setDefaultOption("Auto One", autoOne);
 
     // Put the chooser on the dashboard
     Shuffleboard.getTab("Autonomous").add(m_chooser);
@@ -178,7 +179,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     //Joystick Buttons
     JoystickButton shootButton = new JoystickButton(driverJoystick,XboxController.Button.kBumperRight.value);
-    shootButton.whileHeld(new ShootBall(shooter));
+    shootButton.whileHeld(new ShootBall(shooter, intake));
 
     JoystickButton shootReturnButton = new JoystickButton(driverJoystick,XboxController.Button.kBumperLeft.value);
     shootReturnButton.whileHeld(new ShootReturner(shooter));
@@ -187,10 +188,10 @@ public class RobotContainer {
     invertButton.whenPressed(new InvertDriveTrain(driveTrain));
 
     JoystickButton autoButtonRight = new JoystickButton(driverJoystick, XboxController.Button.kStart.value);
-    autoButtonRight.whenPressed(new AutonomousOne(driveTrain, shooter));
+    autoButtonRight.whenPressed(new AutonomousOne(driveTrain, shooter, intake));
 
     JoystickButton autoButtonLeft = new JoystickButton(driverJoystick, XboxController.Button.kBack.value);
-    autoButtonLeft.whenPressed(new AutonomousTwo(driveTrain, shooter));
+    autoButtonLeft.whenPressed(new AutonomousTwo(driveTrain, shooter, intake));
 
     //Pov or Dpad Buttons
     POVButton driveForwardButton = new POVButton(driverJoystick, 0);

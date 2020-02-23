@@ -51,24 +51,6 @@ public class BallShooter extends SubsystemBase {
     gate.setAngle(90);
   }
 
-  public boolean autoShoot()
-  {
-    Timer timer = new Timer();
-    timer.reset();
-    timer.start();
-    while(timer.get() < shootTime)
-    {
-        shootBall();
-        if (timer.get() > preloadTime)
-        {
-        openGate();
-        }
-    }
-    timer.stop();
-    closeGate(); 
-    return true;
-  }
-
   public void reverseGate()
   {
     gate.setAngle(0);

@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Timer;
 //import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -23,10 +24,14 @@ public class Intake extends SubsystemBase {
    * Creates a new Intake.
    */
   //private Spark intakeRoller;
+  
   private static final int deviceID = Constants.INTAKE_CAN;
   private CANSparkMax intakeRoller;
   
   public double intakeSpeed = Constants.INTAKESPEED;
+  public double autoIntakeSpeed = Constants.AUTO_INTAKE_SPEED;
+  private double shootTime = Constants.SHOOT_TIME;
+  private double preloadTime = Constants.PRELOAD_TIME;
   public Intake() {
     /*intakeRoller = new Spark(Constants.INTAKE_MOTOR);
     addChild("IntakeRoller", intakeRoller);
@@ -42,6 +47,11 @@ public class Intake extends SubsystemBase {
   double intakeValue = (rightTrigger - leftTrigger) * Constants.INTAKESPEED;
   //System.out.println("Intake: " + intakeValue);
   intakeRoller.set(intakeValue);
+ }
+
+ public void runIntake()
+ {
+      intakeRoller.set(autoIntakeSpeed);
  }
 
   public void stop()

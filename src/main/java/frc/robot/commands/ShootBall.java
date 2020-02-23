@@ -11,18 +11,22 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.BallShooter;
+import frc.robot.subsystems.Intake;
 
 
 public class ShootBall extends CommandBase {
+ Intake intake;
  BallShooter shooter;
  Timer timer;
  
   /**
    * Creates a new TakeBallIn.
    */
-  public ShootBall(BallShooter s) {
+  public ShootBall(BallShooter s, Intake i) {
     shooter = s;
+    intake = i;
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(intake);
     addRequirements(shooter);
     timer = new Timer();
   }
@@ -42,6 +46,7 @@ public class ShootBall extends CommandBase {
   if (timer.get() > Constants.PRELOAD_TIME)
   {
     shooter.openGate();
+    intake.runIntake();
   }
   }
 
@@ -51,6 +56,7 @@ public class ShootBall extends CommandBase {
     timer.stop();
     shooter.closeGate(); 
     shooter.stop();
+    intake.stop();
   }
 
   // Returns true when the command should end.
