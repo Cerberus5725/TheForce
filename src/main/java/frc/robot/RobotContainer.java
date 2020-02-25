@@ -9,8 +9,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+//import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.AutonomousOne;
 import frc.robot.commands.AutonomousTwo;
 import frc.robot.commands.DriveWithJoySticks;
@@ -165,8 +166,10 @@ public class RobotContainer {
     m_chooser.addOption("Auto Two", autoTwo);
     m_chooser.setDefaultOption("Auto One", autoOne);
 
-    // Put the chooser on the dashboard
-    Shuffleboard.getTab("Autonomous").add(m_chooser);
+    // Put the chooser on the shuffle board dashboard and in smartdashboard
+    //Shuffleboard.getTab("Autonomous").add(m_chooser);
+    //SmartDashboard.putString("AUTO CHOOSER", "TRUE");
+    SmartDashboard.putData("Autonomous", m_chooser);
     configureButtonBindings();
   }
 
@@ -179,7 +182,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     //Joystick Buttons
     JoystickButton shootButton = new JoystickButton(driverJoystick,XboxController.Button.kBumperRight.value);
-    shootButton.whileHeld(new ShootBall(shooter, intake));
+    shootButton.whileHeld(new ShootBall(shooter));
 
     JoystickButton shootReturnButton = new JoystickButton(driverJoystick,XboxController.Button.kBumperLeft.value);
     shootReturnButton.whileHeld(new ShootReturner(shooter));

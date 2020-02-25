@@ -17,7 +17,7 @@ package frc.robot;
  */
 public final class Constants {
     // Motor Speeds
-    public static double DRIVETRAINSPEED = 0.55;
+    public static double DRIVETRAINSPEED = 0.45;
     public static double AUTONOMOUSSPEED = 0.3;
     public static double INTAKESPEED = 0.5;
     public static double AUTO_INTAKE_SPEED = 0.25;
@@ -28,14 +28,15 @@ public final class Constants {
     public static double WINCHSPEED = 0.5;
     //Autononmous Variables
     // DriveTrain SetPoint Distance
-    public static double SETPOINT_FORWARD_CLOSE = 0.515;
+    public static double SETPOINT_FORWARD_CLOSE = 0.51;
     public static double SETPOINT_FORWARD_FAR = 0.95;
-    public static double DRIVE_FORWARD_TIME = 1.5;
+    public static double DRIVE_FORWARD_TIME = 1.0;
     public static double DRIVE_BACKWARD_TIME = 1.0;
     public static double TURN_TIME_90 = 1.0;
     // Auto joystick override tolerance
     public static double JOYSTICK_OVERRIDE_TOLERANCE = 0.1;
-    public static double PRELOAD_TIME = 2.5;
+    public static double PRELOAD_TIME = 1.0;
+    public static double AUTO_INTAKE_DELAY = 4;
     public static double SHOOT_TIME = 8.0;
     // Joystick Number
     public static int JOYSTICK_NUMBER = 0;

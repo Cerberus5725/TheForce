@@ -8,7 +8,6 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.Servo;
@@ -19,8 +18,6 @@ public class BallShooter extends SubsystemBase {
    */
   private Spark shootRoller;
   private double shootSpeed = Constants.SHOOTERSPEED;
-  private double preloadTime = Constants.PRELOAD_TIME;
-  private double shootTime = Constants.SHOOT_TIME;
   
   private Servo gate;
   public BallShooter() {
@@ -56,7 +53,6 @@ public class BallShooter extends SubsystemBase {
     gate.setAngle(0);
   }
  
-
   public void stop()
   {
    shootRoller.set(0);

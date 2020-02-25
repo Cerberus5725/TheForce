@@ -40,7 +40,10 @@ public class AutoShoot extends CommandBase {
         if (timer.get() > Constants.PRELOAD_TIME)
         {
         ballShooter.openGate();
-        intake.runIntake();
+        }
+        if (timer.get() > Constants.AUTO_INTAKE_DELAY)
+        {
+          intake.runIntake();
         }
     }
     timer.stop();

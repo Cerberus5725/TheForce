@@ -6,8 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.subsystems;
-
-import edu.wpi.first.wpilibj.Timer;
 //import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -30,8 +28,6 @@ public class Intake extends SubsystemBase {
   
   public double intakeSpeed = Constants.INTAKESPEED;
   public double autoIntakeSpeed = Constants.AUTO_INTAKE_SPEED;
-  private double shootTime = Constants.SHOOT_TIME;
-  private double preloadTime = Constants.PRELOAD_TIME;
   public Intake() {
     /*intakeRoller = new Spark(Constants.INTAKE_MOTOR);
     addChild("IntakeRoller", intakeRoller);
