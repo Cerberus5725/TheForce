@@ -62,4 +62,8 @@ public final class Constants {
     public static int XBOX_LEFT_X_AXIS = 0;
     public static int XBOX_LEFT_Y_AXIS = 1;
     public static int XBOX_RIGHT_Y_AXIS = 5;
+    // Vision Tracking
+    public static double TARGET = 152;
+	public static double PRECISION = 15.0;
+	public static double DELAY_TIME = 1.0;
 }

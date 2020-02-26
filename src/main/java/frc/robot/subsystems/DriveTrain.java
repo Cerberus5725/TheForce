@@ -219,9 +219,7 @@ public class DriveTrain extends SubsystemBase {
 
     public boolean driveToDistanceClose(XboxController controller)
     {
-      while(getAverageDistanceToObject() > setPointForwardClose && 
-      Math.abs(controller.getRawAxis(xBoxLeftYAxis)) < joystickOverrideTolerance &&
-      Math.abs(controller.getRawAxis(xBoxLeftXAxis)) < joystickOverrideTolerance)
+      while(getAverageDistanceToObject() > setPointForwardClose && !joystickOverRide(controller))
       {
       driveForward();
       }
@@ -230,13 +228,24 @@ public class DriveTrain extends SubsystemBase {
 
     public boolean driveToDistanceFar(XboxController controller)
     {
-      while(getAverageDistanceToObject() > setPointForwardFar && 
-      Math.abs(controller.getRawAxis(xBoxLeftYAxis)) < joystickOverrideTolerance &&
-      Math.abs(controller.getRawAxis(xBoxLeftXAxis)) < joystickOverrideTolerance)
+      while(getAverageDistanceToObject() > setPointForwardFar && !joystickOverRide(controller))
       {
       driveForward();
       }
       return true;
+    }
+
+    public boolean joystickOverRide(XboxController controller)
+    {
+      if(Math.abs(controller.getRawAxis(xBoxLeftYAxis)) < joystickOverrideTolerance &&
+      Math.abs(controller.getRawAxis(xBoxLeftXAxis)) < joystickOverrideTolerance)
+      {
+        return false;
+      }
+      else
+      {
+        return true;
+      }
     }
 
     public void stop()
