@@ -19,6 +19,8 @@ public final class Constants {
     // Motor Speeds
     public static double DRIVETRAINSPEED = 0.45;
     public static double AUTONOMOUSSPEED = 0.3;
+    public static double VEER_SLOW = 0.25;
+    public static double VEER_FAST = 0.35;
     public static double INTAKESPEED = 0.5;
     public static double AUTO_INTAKE_SPEED = 0.25;
     public static double SHOOTERSPEED = 0.65;
@@ -63,7 +65,8 @@ public final class Constants {
     public static int XBOX_LEFT_Y_AXIS = 1;
     public static int XBOX_RIGHT_Y_AXIS = 5;
     // Vision Tracking
-    public static double TARGET = 152;
+    // Half of resolution width
+    public static double TARGET = 160;
 	public static double PRECISION = 15.0;
 	public static double DELAY_TIME = 1.0;
 }

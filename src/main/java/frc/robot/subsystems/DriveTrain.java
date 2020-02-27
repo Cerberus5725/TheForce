@@ -28,6 +28,8 @@ public class DriveTrain extends SubsystemBase {
 
   private double dSpeed = Constants.DRIVETRAINSPEED;
   private double aSpeed = Constants.AUTONOMOUSSPEED;
+  private double veerSlow = Constants.VEER_SLOW;
+  private double veerFast = Constants.VEER_FAST;
   private double joystickOverrideTolerance = Constants.JOYSTICK_OVERRIDE_TOLERANCE;
   private double setPointForwardClose = Constants.SETPOINT_FORWARD_CLOSE;
   private double setPointForwardFar = Constants.SETPOINT_FORWARD_FAR;
@@ -156,27 +158,52 @@ public class DriveTrain extends SubsystemBase {
 
     public void driveLeft()
     {
-       motorLeft = aSpeed;
-       motorRight = -aSpeed;
-       motorLeft = aSpeed;
-       motorRight = -aSpeed;
-
-      leftMotorFront.set(motorLeft);
-      rightMotorFront.set(motorRight);
-      leftMotorBack.set(motorLeft);
-      rightMotorBack.set(motorRight);
+      motorLeft = -aSpeed;
+      motorRight = aSpeed;
+      motorLeft = -aSpeed;
+      motorRight = aSpeed;    
+     leftMotorFront.set(motorLeft);
+     rightMotorFront.set(motorRight);
+     leftMotorBack.set(motorLeft);
+     rightMotorBack.set(motorRight);
     }
 
     public void driveRight()
     {
-       motorLeft = -aSpeed;
-       motorRight = aSpeed;
-       motorLeft = -aSpeed;
-       motorRight = aSpeed;    
-      leftMotorFront.set(motorLeft);
-      rightMotorFront.set(motorRight);
-      leftMotorBack.set(motorLeft);
-      rightMotorBack.set(motorRight);
+      motorLeft = aSpeed;
+      motorRight = -aSpeed;
+      motorLeft = aSpeed;
+      motorRight = -aSpeed;
+
+     leftMotorFront.set(motorLeft);
+     rightMotorFront.set(motorRight);
+     leftMotorBack.set(motorLeft);
+     rightMotorBack.set(motorRight);
+    }
+
+    public void veerLeft()
+    {
+      motorLeft = veerSlow;
+      motorRight = veerFast;
+      motorLeft = veerSlow;
+      motorRight = veerFast;    
+     leftMotorFront.set(motorLeft);
+     rightMotorFront.set(motorRight);
+     leftMotorBack.set(motorLeft);
+     rightMotorBack.set(motorRight);
+    }
+
+    public void veerRight()
+    {
+      motorLeft = veerFast;
+      motorRight = veerSlow;
+      motorLeft = veerFast;
+      motorRight = veerSlow;
+
+     leftMotorFront.set(motorLeft);
+     rightMotorFront.set(motorRight);
+     leftMotorBack.set(motorLeft);
+     rightMotorBack.set(motorRight);
     }
 
     public double getAverageDistanceToObject()

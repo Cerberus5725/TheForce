@@ -228,10 +228,10 @@ public class RobotContainer {
     POVButton driveBackwardButton = new POVButton(driverJoystick, 180);
     driveBackwardButton.whileHeld(new DriveBackward(driveTrain));
 
-    POVButton driveLeftButton = new POVButton(driverJoystick, 90);
+    POVButton driveLeftButton = new POVButton(driverJoystick, 270);
     driveLeftButton.whileHeld(new DriveLeft(driveTrain));
 
-    POVButton driveRightButton = new POVButton(driverJoystick, 270);
+    POVButton driveRightButton = new POVButton(driverJoystick, 90);
     driveRightButton.whileHeld(new DriveRight(driveTrain));
 
     //Letter Buttons

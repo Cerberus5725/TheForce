@@ -45,22 +45,23 @@ public class Vision extends CommandBase {
     			System.out.println("Set Target: " + String.valueOf(target));
     			System.out.println("Center of Large Object: " + String.valueOf(center));
     			System.out.println("Distance to Target: " + String.valueOf(distanceToTarget));
-    			System.out.println("Range Finder: " + String.valueOf(drivetrain.getAverageDistanceToObject()));
+     			System.out.println("Range Finder: " + String.valueOf(drivetrain.getAverageDistanceToObject()));
     	    	// If not aiming at the target 
-    	    	 
-    	    	 
+    	    	  	    	 
     			if(Math.abs(distanceToTarget) > precision)
     			{
     	    		if(distanceToTarget > 0)
     	    		{
     	    			// TurnLeft
-    	    			drivetrain.driveLeft();
+						drivetrain.driveLeft();
+						//drivetrain.veerLeft();
     	    			
     	    		}
     	    		else if(distanceToTarget < 0)
     	    		{
     	    			// TurnRight
-    	    			drivetrain.driveRight();
+						drivetrain.driveRight();
+						//drivetrain.veerRight();
     	    		
     	    		}
     			}	
