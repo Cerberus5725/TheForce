@@ -13,12 +13,16 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.AutoShoot;
-import frc.robot.commands.AutonomousOne;
-import frc.robot.commands.AutonomousTwo;
+import frc.robot.commands.AutoShootLong;
+import frc.robot.commands.RangeUniversal;
+import frc.robot.commands.RightPositionSeek;
+import frc.robot.commands.VisionUniversal;
 import frc.robot.commands.DriveWithJoySticks;
 import frc.robot.commands.InvertDriveTrain;
+import frc.robot.commands.LeftPositionSeek;
 import frc.robot.commands.IntakeSystem;
 import frc.robot.commands.ShootBall;
+import frc.robot.commands.ShootLongDrive;
 import frc.robot.commands.ShootReturner;
 import frc.robot.commands.SpinWheelLeft;
 import frc.robot.commands.SpinWheelRight;
@@ -78,6 +82,7 @@ public class RobotContainer {
   private final BallShooter shooter;
   private final ShootBall shootBall;
   private final AutoShoot autoShoot;
+  private final AutoShootLong autoShootLong;
 
   private final Intake intake;
   private final IntakeSystem intakeSystem;
@@ -99,8 +104,11 @@ public class RobotContainer {
   private final Vision vision;
 
    // Autonomous
-   private final AutonomousOne autoOne;
-   private final AutonomousTwo autoTwo;
+   private final RangeUniversal rangeUniversal;
+   private final VisionUniversal visionUniversal;
+   private final ShootLongDrive shootLongDrive;
+   private final LeftPositionSeek leftPositionSeek;
+   private final RightPositionSeek rightPositionSeek;
 
 
    // A chooser for autonomous commands
@@ -134,6 +142,8 @@ public class RobotContainer {
     shootBall.addRequirements(shooter);
     autoShoot = new AutoShoot(shooter, intake);
     autoShoot.addRequirements(shooter,intake);
+    autoShootLong = new AutoShootLong(shooter, intake);
+    autoShootLong.addRequirements(shooter,intake);
 
     //Drive with DPad
     driveForward = new DriveForward(driveTrain);
@@ -183,13 +193,20 @@ public class RobotContainer {
     vision.addRequirements(driveTrain,camera);
 
 
-    // Initialize autonomous commands here as they need the depend subsystems and commands initialized first.
-    autoOne = new AutonomousOne(driveTrain, shooter, intake);
-    autoTwo = new AutonomousTwo(driveTrain, shooter, intake, camera);
+    // Initialize autonomous commands groups
+    rangeUniversal = new RangeUniversal(driveTrain, shooter, intake);
+    visionUniversal = new VisionUniversal(driveTrain, shooter, intake, camera);
+    shootLongDrive = new ShootLongDrive(driveTrain, shooter, intake);
+    leftPositionSeek = new LeftPositionSeek(camera, driveTrain, shooter, intake);
+    rightPositionSeek = new RightPositionSeek(camera, driveTrain, shooter, intake);
 
-    m_chooser.addOption("Middle Drive and Shoot", autoOne);
-    m_chooser.addOption("Vision Tracking and Shoot", autoTwo);
-    m_chooser.setDefaultOption("Auto One", autoOne);
+   // Chooser options in Smart Dashboard
+    m_chooser.addOption("Range Finder Universal", rangeUniversal);
+    m_chooser.addOption("Shoot Long Drive", shootLongDrive);
+    m_chooser.addOption("Left Position Seek", leftPositionSeek);
+    m_chooser.addOption("Right Position Seek", rightPositionSeek);
+    // Default option
+    m_chooser.setDefaultOption("Vision Universal", visionUniversal);
 
     // Put the chooser on the shuffle board dashboard and in smartdashboard
     //Shuffleboard.getTab("Autonomous").add(m_chooser);
@@ -216,10 +233,10 @@ public class RobotContainer {
     invertButton.whenPressed(new InvertDriveTrain(driveTrain));
 
     JoystickButton autoButtonRight = new JoystickButton(driverJoystick, XboxController.Button.kStart.value);
-    autoButtonRight.whenPressed(new AutonomousOne(driveTrain, shooter, intake));
+    autoButtonRight.whenPressed(new RangeUniversal(driveTrain, shooter, intake));
 
     JoystickButton autoButtonLeft = new JoystickButton(driverJoystick, XboxController.Button.kBack.value);
-    autoButtonLeft.whenPressed(new AutonomousTwo(driveTrain, shooter, intake, camera));
+    autoButtonLeft.whenPressed(new VisionUniversal(driveTrain, shooter, intake, camera));
 
     //Pov or Dpad Buttons
     POVButton driveForwardButton = new POVButton(driverJoystick, 0);

@@ -24,17 +24,20 @@ public final class Constants {
     public static double INTAKESPEED = 0.5;
     public static double AUTO_INTAKE_SPEED = 0.25;
     public static double SHOOTERSPEED = 0.65;
+    public static double SHOOTERSPEEDLONG = 0.8;
     public static double SPINNERSPEED = 0.75;
     public static double LIFTUP = 0.1;
     public static double LIFTDROP = 0.1;
     public static double WINCHSPEED = 0.5;
+    public static double REVOLVERSPEED = 0.9;
     //Autononmous Variables
     // DriveTrain SetPoint Distance
-    public static double SETPOINT_FORWARD_CLOSE = 0.51;
+    public static double SETPOINT_FORWARD_CLOSE = 0.31;
     public static double SETPOINT_FORWARD_FAR = 0.95;
-    public static double DRIVE_FORWARD_TIME = 1.0;
+    public static double DRIVE_FORWARD_TIME = 4.0;
     public static double DRIVE_BACKWARD_TIME = 1.0;
-    public static double TURN_TIME_90 = 1.0;
+    public static double TURN_TIME_45 = 0.8;
+    public static double TURN_TIME_90 = 1.5;
     // Auto joystick override tolerance
     public static double JOYSTICK_OVERRIDE_TOLERANCE = 0.1;
     public static double PRELOAD_TIME = 1.0;
@@ -49,13 +52,14 @@ public final class Constants {
     public static int RIGHT_BACK_MOTOR = 3;
     //Shoot and Intake PWM Numbers
     public static int SHOOT_MOTOR = 5;
+    public static int REVOLVER_MOTOR = 4;
     //public static int INTAKE_MOTOR = 6;
     public static int GATE_PWM = 7;
     //Lazy Susan PMW Numbers
     public static int LAZY_SPINNER_MOTOR = 8;
     public static int LAZY_LIFT_MOTOR = 9;
     //Climb PMW Numbers
-    public static int WINCH_MOTOR = 4;    
+    //public static int WINCH_MOTOR = 4;    
     // CAN Numbers's
     public static int INTAKE_CAN = 6;
     public static int WINCH_CAN = 4;

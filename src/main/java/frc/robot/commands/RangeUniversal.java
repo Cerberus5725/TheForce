@@ -16,11 +16,11 @@ import frc.robot.subsystems.Intake;
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/command-groups.html
-public class AutonomousOne extends SequentialCommandGroup {
+public class RangeUniversal extends SequentialCommandGroup {
   /**
    * Creates a new AutonomousCommand.
    */
-  public AutonomousOne(DriveTrain dt, BallShooter bs, Intake i) {
+  public RangeUniversal(DriveTrain dt, BallShooter bs, Intake i) {
   addCommands(new DriveForwardTimed(dt),new DriveToDistanceClose(dt), new AutoShoot(bs,i));
   }
 }

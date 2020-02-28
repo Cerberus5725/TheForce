@@ -37,10 +37,11 @@ public class ShootBall extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-  shooter.shootBall();
+  shooter.shootBall(Constants.SHOOTERSPEED);
   System.out.println("Timer: " + timer.get());
   if (timer.get() > Constants.PRELOAD_TIME)
   {
+    shooter.revolverSpin(Constants.REVOLVERSPEED);
     shooter.openGate();
   }
   }
@@ -51,6 +52,7 @@ public class ShootBall extends CommandBase {
     timer.stop();
     shooter.closeGate(); 
     shooter.stop();
+    shooter.stopRevolver();
   }
 
   // Returns true when the command should end.

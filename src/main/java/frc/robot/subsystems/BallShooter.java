@@ -17,25 +17,35 @@ public class BallShooter extends SubsystemBase {
    * Creates a new Intake.
    */
   private Spark shootRoller;
-  private double shootSpeed = Constants.SHOOTERSPEED;
-  
+  private Spark revolver;
+
   private Servo gate;
   public BallShooter() {
     shootRoller = new Spark(Constants.SHOOT_MOTOR);
     addChild("ShootRoller", shootRoller);
     shootRoller.setInverted(false);
+
     gate = new Servo(Constants.GATE_PWM);
     gate.setAngle(90);
+
+    revolver = new Spark(Constants.REVOLVER_MOTOR);
+    addChild("Revolver", revolver);
+    revolver.setInverted(false);
   }
 
-  public void shootBall()
+  public void revolverSpin(double speed)
   {
-   shootRoller.set(shootSpeed);
+    revolver.set(speed);
   }
 
-  public void shootReturner()
+  public void shootBall(double speed)
   {
-   shootRoller.set(-shootSpeed);
+   shootRoller.set(speed);
+  }
+
+  public void shootReturner(double speed)
+  {
+   shootRoller.set(-speed);
   }
 
   public void openGate()
@@ -56,6 +66,11 @@ public class BallShooter extends SubsystemBase {
   public void stop()
   {
    shootRoller.set(0);
+  }
+
+  public void stopRevolver()
+  {
+    revolver.set(0);
   }
 
   @Override

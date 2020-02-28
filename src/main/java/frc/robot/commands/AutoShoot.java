@@ -36,9 +36,10 @@ public class AutoShoot extends CommandBase {
     timer.start();
     while(timer.get() < Constants.SHOOT_TIME)
     {
-        ballShooter.shootBall();
+        ballShooter.shootBall(Constants.SHOOTERSPEED);
         if (timer.get() > Constants.PRELOAD_TIME)
         {
+        ballShooter.revolverSpin(Constants.REVOLVERSPEED);
         ballShooter.openGate();
         }
         if (timer.get() > Constants.AUTO_INTAKE_DELAY)
@@ -62,6 +63,7 @@ public class AutoShoot extends CommandBase {
   ballShooter.stop();
   intake.stop();
   ballShooter.closeGate(); 
+  ballShooter.stopRevolver();
   }
 
   // Returns true when the command should end.

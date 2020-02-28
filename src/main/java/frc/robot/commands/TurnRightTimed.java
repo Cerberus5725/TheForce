@@ -31,7 +31,7 @@ public class TurnRightTimed extends CommandBase {
   public void initialize() {
     timer.reset();
     timer.start();
-    while(timer.get() < Constants.TURN_TIME_90)
+    while(timer.get() < Constants.TURN_TIME_45)
     {
       driveTrain.driveRight();;
     }

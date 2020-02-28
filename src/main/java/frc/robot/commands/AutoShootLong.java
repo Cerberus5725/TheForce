@@ -7,35 +7,48 @@
 
 package frc.robot.commands;
 
-
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.BallShooter;
+import frc.robot.subsystems.Intake;
 
-public class TurnLeftTimed extends CommandBase {
-  DriveTrain driveTrain;
+public class AutoShootLong extends CommandBase {
+  private final BallShooter ballShooter;
+  private final Intake intake;
   private boolean finish = false;
-  Timer timer;
   /**
-   * Creates a new TurnLeftTimed.
+   * Creates a new AutoShootLong.
    */
-  public TurnLeftTimed(DriveTrain dt) {
-    driveTrain = dt;
-    addRequirements(driveTrain);
-    timer = new Timer();
+  public AutoShootLong(BallShooter bs, Intake i) {
+
     // Use addRequirements() here to declare subsystem dependencies.
+    ballShooter = bs;
+    intake = i;
+    addRequirements(ballShooter);
+    addRequirements(intake);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    Timer timer = new Timer();
     timer.reset();
     timer.start();
-    while(timer.get() < Constants.TURN_TIME_45)
+    while(timer.get() < Constants.SHOOT_TIME)
     {
-      driveTrain.driveLeft();;
+        ballShooter.shootBall(Constants.SHOOTERSPEEDLONG);
+        if (timer.get() > Constants.PRELOAD_TIME)
+        {
+        ballShooter.revolverSpin(Constants.REVOLVERSPEED);
+        ballShooter.openGate();
+        }
+        if (timer.get() > Constants.AUTO_INTAKE_DELAY)
+        {
+          intake.runIntake();
+        }
     }
+    timer.stop();
     finish = true;
   }
 
@@ -47,7 +60,10 @@ public class TurnLeftTimed extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    driveTrain.stop();
+    ballShooter.stop();
+    intake.stop();
+    ballShooter.closeGate(); 
+    ballShooter.stopRevolver();
   }
 
   // Returns true when the command should end.
