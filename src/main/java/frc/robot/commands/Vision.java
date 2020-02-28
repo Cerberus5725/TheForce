@@ -40,7 +40,7 @@ public class Vision extends CommandBase {
     	    	boolean cameraReading = center != 0.0 ? true: false;
     	    	if(cameraReading)
     	    	{
-    	    	double distanceToTarget = target - center; 
+				double distanceToTarget = target - center; 
     			//Logs
     			System.out.println("Set Target: " + String.valueOf(target));
     			System.out.println("Center of Large Object: " + String.valueOf(center));
@@ -53,16 +53,15 @@ public class Vision extends CommandBase {
     	    		if(distanceToTarget > 0)
     	    		{
     	    			// TurnLeft
-						drivetrain.driveLeft();
-						//drivetrain.veerLeft();
+						//drivetrain.driveLeft();
+						drivetrain.veerLeft();
     	    			
     	    		}
     	    		else if(distanceToTarget < 0)
     	    		{
     	    			// TurnRight
-						drivetrain.driveRight();
-						//drivetrain.veerRight();
-    	    		
+						//drivetrain.driveRight();
+						drivetrain.veerRight();
     	    		}
     			}	
     			else
@@ -74,8 +73,9 @@ public class Vision extends CommandBase {
     			}
     	    	else
     	    	{
-    	    		// If camera is not reading
-    	    		drivetrain.stop();
+				 // Do nothing
+				 //drivetrain.stop();
+				 drivetrain.driveForward();
     	    	}
     		}
     	   // Finish loop when rangefinders reach target distance

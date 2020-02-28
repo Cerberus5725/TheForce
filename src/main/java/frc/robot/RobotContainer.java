@@ -187,8 +187,8 @@ public class RobotContainer {
     autoOne = new AutonomousOne(driveTrain, shooter, intake);
     autoTwo = new AutonomousTwo(driveTrain, shooter, intake, camera);
 
-    m_chooser.addOption("Auto One", autoOne);
-    m_chooser.addOption("Auto Two", autoTwo);
+    m_chooser.addOption("Middle Drive and Shoot", autoOne);
+    m_chooser.addOption("Vision Tracking and Shoot", autoTwo);
     m_chooser.setDefaultOption("Auto One", autoOne);
 
     // Put the chooser on the shuffle board dashboard and in smartdashboard

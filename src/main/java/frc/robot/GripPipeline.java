@@ -1,4 +1,3 @@
-
 package frc.robot;
 import java.util.ArrayList;
 import java.util.List;
@@ -174,4 +173,6 @@ public class GripPipeline implements VisionPipeline {
 
 
 }
+
+
 

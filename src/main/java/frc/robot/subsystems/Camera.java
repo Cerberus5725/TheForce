@@ -19,6 +19,7 @@ import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constants;
 // Added imports
 import  frc.robot.GripPipeline;
 
@@ -39,8 +40,8 @@ public class Camera extends SubsystemBase {
 	private double areaLarge = 0.0;
 	
 	// Likely important values for get center as it should be half of these.
-	public static final int cameraResX = 320;
-	public static final int cameraResY = 240;
+	private static final int cameraResX = Constants.CAMERA_RES_X;
+	private static final int cameraResY = Constants.CAMERA_RES_Y;
   /**
    * Creates a new Camera.
    */
@@ -97,9 +98,10 @@ public class Camera extends SubsystemBase {
 						areaLarge = widestRect.area();
                     	// System.out.println("Center X: " + centerXLarge);
                     	//draws the rectangles onto the camera image sent to the dashboard
-                    	Imgproc.rectangle(mat, new Point(widestRect.x, widestRect.y), new Point(widestRect.x + widestRect.width, widestRect.y + widestRect.height), new Scalar(0, 0, 255), 2); 
+                    	Imgproc.rectangle(mat, new Point(widestRect.x, widestRect.y), new Point(widestRect.x + widestRect.width, widestRect.y + widestRect.height), new Scalar(255, 0, 0), 2); 
                     	SmartDashboard.putString("Vision State", "Executed overlay!");
-                    	SmartDashboard.putNumber("Center X", centerXLarge);
+						SmartDashboard.putNumber("Center X", centerXLarge);
+						SmartDashboard.putNumber("Width X", widthLarge);
                     	
                     }
                     else

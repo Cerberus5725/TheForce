@@ -12,6 +12,7 @@ import java.util.Arrays;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -241,6 +242,7 @@ public class DriveTrain extends SubsystemBase {
       // Simple get and divide both ranges
       //double rangeFinderAverage = (rangeFinderLeft.getAverageVoltage()+rangeFinderRight.getAverageVoltage())/2;
       //System.out.println("Range Finder: " + rangeFinderAverage);
+      SmartDashboard.putNumber("Range Finder Distance", rangeFinderAverage);
       return rangeFinderAverage;	
     }
 
