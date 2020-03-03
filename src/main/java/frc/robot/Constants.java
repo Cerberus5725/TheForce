@@ -29,7 +29,7 @@ public final class Constants {
     public static double LIFTUP = 0.1;
     public static double LIFTDROP = 0.1;
     public static double WINCHSPEED = 0.5;
-    public static double REVOLVERSPEED = 0.5;
+    public static double REVOLVERSPEED = 0.4;
     //Autononmous Variables
     // DriveTrain SetPoint Distance
     public static double SETPOINT_FORWARD_CLOSE = 0.31;
