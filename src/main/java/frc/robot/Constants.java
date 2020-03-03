@@ -29,7 +29,7 @@ public final class Constants {
     public static double LIFTUP = 0.1;
     public static double LIFTDROP = 0.1;
     public static double WINCHSPEED = 0.5;
-    public static double REVOLVERSPEED = 0.9;
+    public static double REVOLVERSPEED = 0.5;
     //Autononmous Variables
     // DriveTrain SetPoint Distance
     public static double SETPOINT_FORWARD_CLOSE = 0.31;
@@ -50,14 +50,12 @@ public final class Constants {
     public static int LEFT_BACK_MOTOR = 1;
     public static int RIGHT_FRONT_MOTOR = 2;
     public static int RIGHT_BACK_MOTOR = 3;
-    //Shoot and Intake PWM Numbers
+    public static int REVOLVER_MOTOR_LEFT = 4;
     public static int SHOOT_MOTOR = 5;
-    public static int REVOLVER_MOTOR = 4;
-    //public static int INTAKE_MOTOR = 6;
+    public static int REVOLVER_MOTOR_RIGHT = 6;
     public static int GATE_PWM = 7;
     //Lazy Susan PMW Numbers
     public static int LAZY_SPINNER_MOTOR = 8;
-    public static int LAZY_LIFT_MOTOR = 9;
     //Climb PMW Numbers
     //public static int WINCH_MOTOR = 4;    
     // CAN Numbers's
