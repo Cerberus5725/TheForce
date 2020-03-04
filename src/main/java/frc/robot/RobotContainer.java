@@ -130,7 +130,6 @@ public class RobotContainer {
     joystickInvert = new InvertDriveTrain(driveTrain);
     joystickInvert.addRequirements(driveTrain);
 
-    driverJoystick = new XboxController(Constants.JOYSTICK_NUMBER);
     //Intake and Shooter
     intake = new Intake();
     intakeSystem = new IntakeSystem(intake);

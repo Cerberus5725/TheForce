@@ -33,15 +33,11 @@ public class DriveTrain extends SubsystemBase {
   private double joystickOverrideTolerance = Constants.JOYSTICK_OVERRIDE_TOLERANCE;
   private double setPointForwardClose = Constants.SETPOINT_FORWARD_CLOSE;
   private double setPointForwardFar = Constants.SETPOINT_FORWARD_FAR;
-  private int xBoxLeftXAxis = Constants.XBOX_LEFT_X_AXIS;
-  private int xBoxLeftYAxis = Constants.XBOX_LEFT_Y_AXIS;
 
   public static Spark leftMotorFront;
   public static Spark rightMotorFront;
   public static Spark leftMotorBack;
   public static Spark rightMotorBack;
-  
-  
   
   
   public DriveTrain() {
@@ -64,8 +60,8 @@ public class DriveTrain extends SubsystemBase {
 
   public void driveWithJoysticks(XboxController controller, double speed)
 	{
-    double joystickX = controller.getRawAxis(xBoxLeftXAxis);
-    double joystickY = -controller.getRawAxis(xBoxLeftYAxis);
+    double joystickX = controller.getRawAxis(Constants.XBOX_LEFT_X_AXIS);
+    double joystickY = -controller.getRawAxis(Constants.XBOX_LEFT_Y_AXIS);
 
       if(!inverted)
       {
@@ -265,8 +261,8 @@ public class DriveTrain extends SubsystemBase {
 
     public boolean joystickOverRide(XboxController controller)
     {
-      if(Math.abs(controller.getRawAxis(xBoxLeftYAxis)) < joystickOverrideTolerance &&
-      Math.abs(controller.getRawAxis(xBoxLeftXAxis)) < joystickOverrideTolerance)
+      if(Math.abs(controller.getRawAxis(Constants.XBOX_LEFT_Y_AXIS)) < joystickOverrideTolerance &&
+      Math.abs(controller.getRawAxis(Constants.XBOX_LEFT_X_AXIS)) < joystickOverrideTolerance)
       {
         return false;
       }

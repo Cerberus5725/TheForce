@@ -45,6 +45,10 @@ public final class Constants {
     public static double SHOOT_TIME = 8.0;
     // Joystick Number
     public static int JOYSTICK_NUMBER = 0;
+        //Axis Numbers
+        public static int XBOX_LEFT_X_AXIS = 0;
+        public static int XBOX_LEFT_Y_AXIS = 1;
+        public static int XBOX_RIGHT_Y_AXIS = 5;
     // Motor PWM Numbers
     public static int LEFT_FRONT_MOTOR = 0;
     public static int LEFT_BACK_MOTOR = 1;
@@ -62,10 +66,7 @@ public final class Constants {
     public static int INTAKE_CAN = 6;
     public static int WINCH_CAN = 4;
     public static int LAZY_LIFT_CAN = 9;
-    //Axis Numbers
-    public static int XBOX_LEFT_X_AXIS = 0;
-    public static int XBOX_LEFT_Y_AXIS = 1;
-    public static int XBOX_RIGHT_Y_AXIS = 5;
+
     // Vision Tracking
     //Camera Res
     public static int CAMERA_RES_X = 320;
