@@ -27,7 +27,6 @@ public class DriveTrain extends SubsystemBase {
   private final AnalogInput rangeFinderLeft = new AnalogInput(0);
   private final AnalogInput rangeFinderRight = new AnalogInput(1);
 
-  private double dSpeed = Constants.DRIVETRAINSPEED;
   private double aSpeed = Constants.AUTONOMOUSSPEED;
   private double veerSlow = Constants.VEER_SLOW;
   private double veerFast = Constants.VEER_FAST;
@@ -63,15 +62,15 @@ public class DriveTrain extends SubsystemBase {
     rightMotorBack.setInverted(true);
   }
 
-  public void driveWithJoysticks(XboxController controller)
+  public void driveWithJoysticks(XboxController controller, double speed)
 	{
     double joystickX = controller.getRawAxis(xBoxLeftXAxis);
     double joystickY = -controller.getRawAxis(xBoxLeftYAxis);
 
       if(!inverted)
       {
-        motorLeft = (joystickX + joystickY) *dSpeed;
-        motorRight = (-joystickX + joystickY) *dSpeed;
+        motorLeft = (joystickX + joystickY) *speed;
+        motorRight = (-joystickX + joystickY) *speed;
         if(motorLeft >= 1.0)
         {
             motorLeft = 1.0;
@@ -89,8 +88,8 @@ public class DriveTrain extends SubsystemBase {
       }
       else
       {
-        motorLeft = (joystickX - joystickY) *dSpeed;
-        motorRight = (-joystickX - joystickY) *dSpeed;
+        motorLeft = (joystickX - joystickY) *speed;
+        motorRight = (-joystickX - joystickY) *speed;
         if(motorLeft >= 1.0)
         {
             motorLeft = 1.0;
