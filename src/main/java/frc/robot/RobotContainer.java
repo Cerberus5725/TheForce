@@ -17,6 +17,8 @@ import frc.robot.commands.AutoShootLong;
 import frc.robot.commands.RangeUniversal;
 import frc.robot.commands.RightPositionSeek;
 import frc.robot.commands.VisionUniversal;
+import frc.robot.commands.WinchDown;
+import frc.robot.commands.WinchUp;
 import frc.robot.commands.DriveWithJoySticks;
 import frc.robot.commands.InvertDriveTrain;
 import frc.robot.commands.LeftPositionSeek;
@@ -24,14 +26,15 @@ import frc.robot.commands.IntakeSystem;
 import frc.robot.commands.ShootBall;
 import frc.robot.commands.ShootLongDrive;
 import frc.robot.commands.ShootReturner;
-import frc.robot.commands.SpinWheelLeft;
-import frc.robot.commands.SpinWheelRight;
-import frc.robot.commands.SusanLift;
-import frc.robot.commands.SusanLower;
+import frc.robot.commands.SpinBlue;
+import frc.robot.commands.SpinGreen;
+import frc.robot.commands.SpinRed;
+import frc.robot.commands.SpinYellow;
+import frc.robot.commands.SusanLeftRight;
+import frc.robot.commands.SusanUpDown;
 import frc.robot.commands.TurnLeftTimed;
 import frc.robot.commands.TurnRightTimed;
 import frc.robot.commands.Vision;
-import frc.robot.commands.WinchStick;
 import frc.robot.commands.DriveForward;
 import frc.robot.commands.DriveForwardTimed;
 import frc.robot.commands.DriveBackward;
@@ -43,6 +46,7 @@ import frc.robot.commands.DriveToDistanceFar;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.LazySusan;
+import frc.robot.subsystems.LazySusanLift;
 import frc.robot.subsystems.BallShooter;
 import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.Camera;
@@ -90,14 +94,19 @@ public class RobotContainer {
 
   // Lazy Susan
    private final LazySusan lazySusan;
-   private final SpinWheelLeft spinWheelLeft;
-   private final SpinWheelRight spinWheelRight;
-   private final SusanLift susanLift;
-   private final SusanLower susanLower;
+   private final SusanLeftRight susanLeftRight;
+   private final SpinBlue spinBlue;
+   private final SpinRed spinRed;
+   private final SpinYellow spinYellow;
+   private final SpinGreen spinGreen;
 
+  // Lazy Susan Lift
+   private final LazySusanLift lazySusanLift;
+   private final SusanUpDown susanUpDown;
    //winch
    private final Climb climb;
-   private final WinchStick winchStick;
+   private final WinchUp winchUp;
+   private final WinchDown winchDown;
 
   //camera
   private final Camera camera;
@@ -167,24 +176,33 @@ public class RobotContainer {
     turnLeftTimed = new TurnLeftTimed(driveTrain);
     turnLeftTimed.addRequirements(driveTrain);
 
-
-
     //Lazy Susan
     lazySusan = new LazySusan();
-    spinWheelLeft = new SpinWheelLeft(lazySusan);
-    spinWheelLeft.addRequirements(lazySusan);
-    spinWheelRight = new SpinWheelRight(lazySusan);
-    spinWheelRight.addRequirements(lazySusan);
-    susanLower = new SusanLower(lazySusan);
-    susanLower.addRequirements(lazySusan);
-    susanLift = new SusanLift(lazySusan);
-    susanLift.addRequirements(lazySusan);
+    susanLeftRight = new SusanLeftRight(lazySusan);
+    susanLeftRight.addRequirements(lazySusan);
+    spinBlue = new SpinBlue(lazySusan);
+    spinBlue.addRequirements(lazySusan);
+    spinRed = new SpinRed(lazySusan);
+    spinRed.addRequirements(lazySusan);
+    spinYellow = new SpinYellow(lazySusan);
+    spinYellow.addRequirements(lazySusan);
+    spinGreen = new SpinGreen(lazySusan);
+    spinGreen.addRequirements(lazySusan);
+
+    lazySusan.setDefaultCommand(susanLeftRight);
+
+    //Lazy Susan Lift
+    lazySusanLift = new LazySusanLift();
+    susanUpDown = new SusanUpDown(lazySusanLift);
+    susanUpDown.addRequirements(lazySusanLift);
+    lazySusanLift.setDefaultCommand(susanUpDown);
 
     //Winch
     climb = new Climb();
-    winchStick = new WinchStick(climb);
-    winchStick.addRequirements(climb);
-    climb.setDefaultCommand(winchStick);
+    winchUp = new WinchUp(climb);
+    winchUp.addRequirements(climb);
+    winchDown = new WinchDown(climb);
+    winchDown.addRequirements(climb);
 
     //Camera
     camera = new Camera();
@@ -231,11 +249,11 @@ public class RobotContainer {
     JoystickButton invertButton = new JoystickButton(driverJoystick, XboxController.Button.kStickLeft.value);
     invertButton.whenPressed(new InvertDriveTrain(driveTrain));
 
-    JoystickButton autoButtonRight = new JoystickButton(driverJoystick, XboxController.Button.kStart.value);
-    autoButtonRight.whenPressed(new RangeUniversal(driveTrain, shooter, intake));
+    JoystickButton winchUpButton = new JoystickButton(driverJoystick, XboxController.Button.kStart.value);
+    winchUpButton.whileHeld(new WinchUp(climb));
 
-    JoystickButton autoButtonLeft = new JoystickButton(driverJoystick, XboxController.Button.kBack.value);
-    autoButtonLeft.whenPressed(new VisionUniversal(driveTrain, shooter, intake, camera));
+    JoystickButton winchDownButton = new JoystickButton(driverJoystick, XboxController.Button.kBack.value);
+    winchDownButton.whileHeld(new WinchDown(climb));
 
     //Pov or Dpad Buttons
     POVButton driveForwardButton = new POVButton(driverJoystick, 0);
@@ -251,17 +269,17 @@ public class RobotContainer {
     driveRightButton.whileHeld(new DriveRight(driveTrain));
 
     //Letter Buttons
-    JoystickButton spinLeftButton = new JoystickButton(driverJoystick, XboxController.Button.kX.value);
-    spinLeftButton.whileHeld(new SpinWheelLeft(lazySusan));
+    JoystickButton blueButton = new JoystickButton(driverJoystick, XboxController.Button.kX.value);
+    blueButton.whenPressed(new SpinBlue(lazySusan));
 
-    JoystickButton spinRightButton = new JoystickButton(driverJoystick, XboxController.Button.kB.value);
-    spinRightButton.whileHeld(new SpinWheelRight(lazySusan));
+    JoystickButton redButton = new JoystickButton(driverJoystick, XboxController.Button.kB.value);
+    redButton.whenPressed(new SpinRed(lazySusan));
 
-    JoystickButton susanUpButton = new JoystickButton(driverJoystick, XboxController.Button.kY.value);
-    susanUpButton.whileHeld(new SusanLift(lazySusan));
+    JoystickButton yellowButton = new JoystickButton(driverJoystick, XboxController.Button.kY.value);
+    yellowButton.whenPressed(new SpinYellow(lazySusan));
 
-    JoystickButton susanDownButton = new JoystickButton(driverJoystick, XboxController.Button.kA.value);
-    susanDownButton.whileHeld(new SusanLower(lazySusan));
+    JoystickButton greenButton = new JoystickButton(driverJoystick, XboxController.Button.kA.value);
+    greenButton.whenPressed(new SpinGreen(lazySusan));
 
   }
 

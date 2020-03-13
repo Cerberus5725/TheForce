@@ -8,17 +8,17 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.LazySusan;
+import frc.robot.subsystems.Climb;
 
-public class SpinWheelRight extends CommandBase {
-  LazySusan susan;
+public class WinchUp extends CommandBase {
+  private final Climb climb;
   /**
-   * Creates a new SpinWheelRight.
+   * Creates a new WinchUp.
    */
-  public SpinWheelRight(LazySusan L) {
+  public WinchUp(Climb C) {
     // Use addRequirements() here to declare subsystem dependencies.
-    susan = L;
-    addRequirements(susan);
+    climb = C;
+    addRequirements(climb);
   }
 
   // Called when the command is initially scheduled.
@@ -29,13 +29,13 @@ public class SpinWheelRight extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    susan.spinWheelRight();
+    climb.winchUp();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    susan.stopSpinner();
+    climb.stop();
   }
 
   // Returns true when the command should end.

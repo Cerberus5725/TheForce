@@ -8,10 +8,9 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 public class LazySusan extends SubsystemBase {
   /**
@@ -19,10 +18,7 @@ public class LazySusan extends SubsystemBase {
    */
   private VictorSP susanSpinner;
   public double spinnerSpeed = Constants.SPINNERSPEED;
-  //private VictorSP susanLift;
-  private TalonFX susanLift;
-  public double liftUp = Constants.LIFTUP;
-  public double liftDrop = Constants.LIFTDROP;
+
 
   public LazySusan() 
   {
@@ -31,39 +27,40 @@ public class LazySusan extends SubsystemBase {
     susanSpinner.setInverted(false);
 
     //susanLift = new VictorSP(Constants.LAZY_LIFT_MOTOR);
-    susanLift = new TalonFX(Constants.LAZY_LIFT_CAN);
     //addChild("SusanLift", susanLift);
     //susanLift.setInverted(true);
   }
 
-  public void spinWheelRight()
+
+  public void susanLeftRight(XboxController controller)
   {
-    susanSpinner.set(spinnerSpeed);
+    double joystickX = -controller.getRawAxis(Constants.XBOX_RIGHT_X_AXIS);
+    susanSpinner.set(joystickX*spinnerSpeed);
   }
 
-  public void spinWheelLeft()
+  public void spinBlue()
   {
-    susanSpinner.set(-spinnerSpeed);
+   // Program to spin to blue
   }
 
-  public void liftSusan()
+  public void spinRed()
   {
-    susanLift.set(ControlMode.PercentOutput,-liftUp);
+   // Program to spin to red
   }
 
-  public void lowerSusan()
+  public void spinYellow()
   {
-    susanLift.set(ControlMode.PercentOutput, liftDrop);
+    // Program to spin to yellow
   }
+
+  public void spinGreen()
+ {
+
+ }
 
   public void stopSpinner()
   {
     susanSpinner.set(0);
-  }
-  
-  public void stopLift()
-  {
-    susanLift.set(ControlMode.PercentOutput,0);
   }
 
   @Override

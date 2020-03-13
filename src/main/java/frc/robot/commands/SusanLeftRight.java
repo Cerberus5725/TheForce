@@ -9,17 +9,17 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.Climb;
+import frc.robot.subsystems.LazySusan;
 
-public class WinchStick extends CommandBase {
-  private final Climb climb;
+public class SusanLeftRight extends CommandBase {
+  LazySusan lazySusan;
   /**
-   * Creates a new WinchStick.
+   * Creates a new SusanUpDown.
    */
-  public WinchStick(Climb C) {
+  public SusanLeftRight(LazySusan s) {
+    lazySusan = s;
+    addRequirements(lazySusan);
     // Use addRequirements() here to declare subsystem dependencies.
-    climb = C;
-    addRequirements(climb);
   }
 
   // Called when the command is initially scheduled.
@@ -30,7 +30,7 @@ public class WinchStick extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    climb.winchStick(RobotContainer.driverJoystick);
+    lazySusan.susanLeftRight(RobotContainer.driverJoystick);
   }
 
   // Called once the command ends or is interrupted.

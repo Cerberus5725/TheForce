@@ -10,35 +10,32 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.LazySusan;
 
-public class SpinWheelLeft extends CommandBase {
-  LazySusan susan;
-
+public class SpinRed extends CommandBase {
+  LazySusan lazySusan;
   /**
-   * Creates a new SpinWheelLeft.
+   * Creates a new SpinGreen.
    */
-  public SpinWheelLeft(LazySusan L) 
-  {
+  public SpinRed(LazySusan s) {
+    lazySusan = s;
+    addRequirements(lazySusan);
     // Use addRequirements() here to declare subsystem dependencies.
-    susan = L;
-    addRequirements(susan);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    lazySusan.spinRed();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() 
-  {
-    susan.spinWheelLeft();
+  public void execute() {
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    susan.stopSpinner();
+    lazySusan.stopSpinner();
   }
 
   // Returns true when the command should end.

@@ -16,7 +16,7 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    // Motor Speeds
+	// Motor Speeds
     public static double DRIVETRAINSPEED = 0.45;
     public static double AUTONOMOUSSPEED = 0.3;
     public static double VEER_SLOW = 0.2;
@@ -26,9 +26,8 @@ public final class Constants {
     public static double SHOOTERSPEED = 0.65;
     public static double SHOOTERSPEEDLONG = 0.8;
     public static double SPINNERSPEED = 0.75;
-    public static double LIFTUP = 0.1;
-    public static double LIFTDROP = 0.1;
-    public static double WINCHSPEED = 0.5;
+    public static double LIFTSPEED = 0.1;
+    public static double WINCHSPEED = 0.8;
     public static double REVOLVERSPEED = 0.5;
     //Autononmous Variables
     // DriveTrain SetPoint Distance
@@ -49,6 +48,7 @@ public final class Constants {
         public static int XBOX_LEFT_X_AXIS = 0;
         public static int XBOX_LEFT_Y_AXIS = 1;
         public static int XBOX_RIGHT_Y_AXIS = 5;
+        public static int XBOX_RIGHT_X_AXIS = 4;
     // Motor PWM Numbers
     public static int LEFT_FRONT_MOTOR = 0;
     public static int LEFT_BACK_MOTOR = 1;

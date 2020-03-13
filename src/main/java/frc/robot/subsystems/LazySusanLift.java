@@ -7,42 +7,38 @@
 
 package frc.robot.subsystems;
 
-//import edu.wpi.first.wpilibj.Spark;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
+
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-public class Climb extends SubsystemBase {
+public class LazySusanLift extends SubsystemBase {
   /**
-   * Creates a new Climb.
+   * Creates a new LazySusanLift.
    */
-  public double winchSpeed = Constants.WINCHSPEED;
-  //private Spark winchMotor;
-  private static final int deviceID = Constants.WINCH_CAN;
-  private CANSparkMax winchMotor;
-  
-  public Climb() {
-    winchMotor = new CANSparkMax(deviceID, MotorType.kBrushless);
-    //("WinchMotor", winchMotor);
-    //winchMotor.setInverted(false);
+  private TalonFX susanLift;
+  public double liftSpeed = Constants.LIFTSPEED;
+
+  public LazySusanLift() {
+    susanLift = new TalonFX(Constants.LAZY_LIFT_CAN);
   }
 
-  public void winchUp()
-  {
-    winchMotor.set(winchSpeed);
-  }
-
-  public void winchDown()
-  {
-     winchMotor.set(-winchSpeed);
-  }
-  public void stop()
-  {
-    winchMotor.set(0);
-  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
   }
+
+  public void susanUpDown(XboxController controller)
+	{
+    double joystickY = -controller.getRawAxis(Constants.XBOX_RIGHT_Y_AXIS);
+    susanLift.set(ControlMode.PercentOutput, joystickY*liftSpeed);
+  }
+ 
+  public void stopLift()
+  {
+    susanLift.set(ControlMode.PercentOutput,0);
+  }
+
 }
