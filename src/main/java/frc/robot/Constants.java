@@ -26,6 +26,7 @@ public final class Constants {
     public static double SHOOTERSPEED = 0.65;
     public static double SHOOTERSPEEDLONG = 0.8;
     public static double SPINNERSPEED = 0.75;
+    public static double SPINNERSPEEDCOLOR = 0.2;
     public static double LIFTSPEED = 0.1;
     public static double WINCHSPEED = 0.8;
     public static double REVOLVERSPEED = 0.5;

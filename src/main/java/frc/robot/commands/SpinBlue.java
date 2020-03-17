@@ -8,9 +8,11 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.LazySusan;
 
 public class SpinBlue extends CommandBase {
+  private boolean finish = false;
   LazySusan lazySusan;
   /**
    * Creates a new SpinGreen.
@@ -23,12 +25,13 @@ public class SpinBlue extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    lazySusan.spinBlue();
+    finish = lazySusan.spinToColor("Blue", RobotContainer.driverJoystick);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
   }
 
   // Called once the command ends or is interrupted.
@@ -40,6 +43,6 @@ public class SpinBlue extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return finish;
   }
 }

@@ -180,6 +180,7 @@ public class RobotContainer {
     lazySusan = new LazySusan();
     susanLeftRight = new SusanLeftRight(lazySusan);
     susanLeftRight.addRequirements(lazySusan);
+    lazySusan.setDefaultCommand(susanLeftRight);
     spinBlue = new SpinBlue(lazySusan);
     spinBlue.addRequirements(lazySusan);
     spinRed = new SpinRed(lazySusan);
@@ -189,7 +190,7 @@ public class RobotContainer {
     spinGreen = new SpinGreen(lazySusan);
     spinGreen.addRequirements(lazySusan);
 
-    lazySusan.setDefaultCommand(susanLeftRight);
+    
 
     //Lazy Susan Lift
     lazySusanLift = new LazySusanLift();
